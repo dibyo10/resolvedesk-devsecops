@@ -1,9 +1,88 @@
-import React,{useEffect,useState} from 'react'; import {createRoot} from 'react-dom/client'; import './styles.css';
-const API='/api';
-function App(){const [tasks,setTasks]=useState([]),[stats,setStats]=useState({total:0,todo:0,inProgress:0,done:0}),[filter,setFilter]=useState('ALL'),[showForm,setShowForm]=useState(false),[loading,setLoading]=useState(true),[error,setError]=useState('');
- const load=async()=>{try{setError('');const [a,b]=await Promise.all([fetch(`${API}/tasks`),fetch(`${API}/tasks/stats`)]);if(!a.ok||!b.ok)throw Error('Backend unavailable');setTasks(await a.json());setStats(await b.json())}catch(e){setError(e.message)}finally{setLoading(false)}};
- useEffect(()=>{load()},[]); const visible=filter==='ALL'?tasks:tasks.filter(t=>t.status===filter);
- const update=async(t)=>{const next=t.status==='TODO'?'IN_PROGRESS':t.status==='IN_PROGRESS'?'DONE':'TODO';await fetch(`${API}/tasks/${t.id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({...t,status:next})});load()};
- const create=async(e)=>{e.preventDefault();const f=new FormData(e.currentTarget);await fetch(`${API}/tasks`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:f.get('title'),description:f.get('description'),priority:f.get('priority'),assignee:f.get('assignee'),status:'TODO'})});e.currentTarget.reset();setShowForm(false);load()};
- return <div className="app"><aside className="sidebar"><div className="brand"><span className="brand-mark">T</span><div><b>TaskBoard</b><small>DevOps Capstone</small></div></div><nav><a className="active">▦ <span>Dashboard</span></a><a>✓ <span>My Tasks</span></a><a>◫ <span>Projects</span></a><a>◌ <span>Activity</span></a></nav><div className="side-bottom"><div className="upgrade"><strong>Ship with confidence.</strong><p>Build, deploy and observe your application.</p></div><div className="profile"><div className="avatar">NR</div><div><b>Nensi Ravaliya</b><small>Developer</small></div><span>⋮</span></div></div></aside><main className="main"><header><div><p className="eyebrow">WORKSPACE / OVERVIEW</p><h1>Good morning, Nensi 👋</h1><p className="muted">Here’s what’s happening with your team today.</p></div><button className="primary" onClick={()=>setShowForm(true)}>＋ New task</button></header>{error&&<div className="alert">⚠ {error}. Start the backend and PostgreSQL, then refresh.</div>}<section className="stats"><Stat label="Total tasks" value={stats.total} icon="▦"/><Stat label="To do" value={stats.todo} icon="○"/><Stat label="In progress" value={stats.inProgress} icon="◔"/><Stat label="Completed" value={stats.done} icon="✓"/></section><section className="content-grid"><div className="panel tasks-panel"><div className="panel-head"><div><h2>Tasks</h2><p className="muted">Track work across the product team.</p></div><div className="filters">{['ALL','TODO','IN_PROGRESS','DONE'].map(x=><button className={filter===x?'selected':''} onClick={()=>setFilter(x)} key={x}>{x==='ALL'?'All':x.replace('_',' ')}</button>)}</div></div>{loading?<div className="empty">Loading tasks…</div>:<div className="table-wrap"><table><thead><tr><th>Task</th><th>Assignee</th><th>Priority</th><th>Status</th><th></th></tr></thead><tbody>{visible.map(t=><tr key={t.id}><td><div className="task-title"><span className={`dot ${t.status.toLowerCase()}`}></span><div><b>{t.title}</b><small>{t.description}</small></div></div></td><td>{t.assignee}</td><td><span className={`priority ${t.priority.toLowerCase()}`}>{t.priority}</span></td><td><span className={`status ${t.status.toLowerCase()}`}>{t.status.replace('_',' ')}</span></td><td><button className="icon-btn" onClick={()=>update(t)} title="Advance status">↻</button></td></tr>)}</tbody></table>{!visible.length&&<div className="empty">No tasks in this filter.</div>}</div>}</div><aside className="panel activity"><div className="panel-head"><div><h2>Recent activity</h2><p className="muted">Latest workspace events.</p></div></div><Activity icon="✓" text="Monitoring dashboard completed" time="12 min ago"/><Activity icon="◔" text="Release task moved to in progress" time="38 min ago"/><Activity icon="＋" text="New onboarding task created" time="1 hr ago"/><Activity icon="↗" text="Deployment pipeline passed" time="2 hrs ago"/><div className="pipeline"><span>CI</span><i></i><span>Build</span><i></i><span>Scan</span><i></i><span>Deploy</span></div></aside></section>{showForm&&<div className="modal-backdrop"><form className="modal" onSubmit={create}><div className="modal-head"><div><p className="eyebrow">CREATE TASK</p><h2>Add a new task</h2></div><button type="button" className="close" onClick={()=>setShowForm(false)}>×</button></div><label>Task title<input name="title" required placeholder="e.g. Configure production ingress"/></label><label>Description<textarea name="description" placeholder="What needs to be done?"/></label><div className="form-row"><label>Priority<select name="priority"><option>LOW</option><option>MEDIUM</option><option>HIGH</option></select></label><label>Assignee<input name="assignee" defaultValue="Nensi Ravaliya"/></label></div><button className="primary full">Create task</button></form></div>}</main></div>}
-function Stat({label,value,icon}){return <div className="stat"><div className="stat-icon">{icon}</div><div><small>{label}</small><strong>{value}</strong><span>Updated just now</span></div></div>}; function Activity({icon,text,time}){return <div className="activity-row"><span className="activity-icon">{icon}</span><div><b>{text}</b><small>{time}</small></div></div>}; createRoot(document.getElementById('root')).render(<App/>);
+import React, { useCallback, useEffect, useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import { request, statusLabels } from './api';
+import TicketForm from './components/TicketForm';
+import TicketTable from './components/TicketTable';
+import './styles.css';
+
+function App() {
+  const [tickets, setTickets] = useState([]);
+  const [stats, setStats] = useState(null);
+  const [filter, setFilter] = useState('ALL');
+  const [search, setSearch] = useState('');
+  const [editor, setEditor] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
+  const [page, setPage] = useState(0);
+  const [refresh, setRefresh] = useState(0);
+  const pageSize = 25;
+
+  const reload = useCallback(() => setRefresh(value => value + 1), []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const timer = setTimeout(async () => {
+      setLoading(true);
+      setError('');
+      const query = new URLSearchParams({ limit: pageSize, offset: page * pageSize });
+      if (filter !== 'ALL') query.set('status', filter);
+      if (search.trim()) query.set('search', search.trim());
+      try {
+        const [items, counts] = await Promise.all([
+          request(`/tickets?${query}`, { signal: controller.signal }),
+          request('/tickets/stats', { signal: controller.signal }),
+        ]);
+        setTickets(items);
+        setStats(counts);
+      } catch (failure) {
+        if (failure.name !== 'AbortError') setError('We could not load the queue. Check your connection and retry.');
+      } finally {
+        if (!controller.signal.aborted) setLoading(false);
+      }
+    }, 150);
+    return () => { clearTimeout(timer); controller.abort(); };
+  }, [filter, search, page, refresh]);
+
+  async function save(payload) {
+    await request(editor.ticket ? `/tickets/${editor.ticket.id}` : '/tickets', {
+      method: editor.ticket ? 'PUT' : 'POST', body: JSON.stringify(payload),
+    });
+    setNotice(editor.ticket ? 'Ticket updated.' : 'Ticket created.');
+    setEditor(null);
+    reload();
+  }
+
+  async function remove(ticket) {
+    if (!window.confirm(`Delete ticket #${ticket.id}: ${ticket.subject}? This cannot be undone.`)) return;
+    setBusy(true);
+    try {
+      await request(`/tickets/${ticket.id}`, { method: 'DELETE' });
+      setNotice(`Ticket #${ticket.id} deleted.`);
+      if (tickets.length === 1 && page > 0) setPage(page - 1);
+      else reload();
+    } catch (failure) {
+      setError(failure.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return <div className="app">
+    <a className="skip-link" href="#queue">Skip to tickets</a>
+    <aside className="sidebar"><div className="brand"><span className="brand-mark">R</span><div><b>ResolveDesk</b><small>Support workspace</small></div></div><nav aria-label="Ticket queues">{[['ALL', 'All tickets'], ...Object.entries(statusLabels)].map(([value, label]) => <button key={value} className={filter === value ? 'active' : ''} aria-pressed={filter === value} onClick={() => { setFilter(value); setPage(0); }}>{label}</button>)}</nav><div className="side-bottom"><p>Clear queues.<br />Better support.</p><small>Internal demonstration workspace</small></div></aside>
+    <main className="main" id="queue"><header><div><h1>Support queue</h1><p className="muted">Give every request a clear next step.</p></div><button className="primary" onClick={() => setEditor({ ticket: null })}>New ticket</button></header>
+      {error && <div className="alert" role="alert">{error} <button onClick={reload}>Retry</button></div>}
+      <p className="notice" role="status">{notice}</p>
+      <section className="stats" aria-label="Queue summary">{[['Open', 'open'], ['In progress', 'inProgress'], ['Resolved', 'resolved'], ['Urgent unresolved', 'urgent']].map(([label, key]) => <div className="stat" key={key}><small>{label}</small><strong>{stats?.[key] ?? '—'}</strong></div>)}</section>
+      {editor ? <TicketForm key={editor.ticket?.id ?? 'new'} ticket={editor.ticket} onSave={save} onCancel={() => setEditor(null)} /> : <section className="panel"><div className="panel-head"><div><h2>{filter === 'ALL' ? 'All tickets' : statusLabels[filter]}</h2><p className="muted">{stats ? `${stats.total} tickets across the workspace` : 'Connecting to your workspace'}</p></div><label className="search">Search tickets<input type="search" value={search} maxLength={200} onChange={event => { setSearch(event.target.value); setPage(0); }} placeholder="Subject, requester or description" /></label></div>
+        {loading ? <p className="empty" role="status">Loading tickets…</p> : !tickets.length ? <div className="empty"><h3>{search || filter !== 'ALL' ? 'No matching tickets' : 'Your queue is clear'}</h3><p>{search || filter !== 'ALL' ? 'Try another search or queue.' : 'Create your first ticket to start supporting your team.'}</p></div> : <TicketTable tickets={tickets} onEdit={ticket => setEditor({ ticket })} onDelete={remove} busy={busy} />}
+        <div className="pagination"><button disabled={page === 0 || loading} onClick={() => setPage(page - 1)}>Previous</button><span>Page {page + 1}</span><button disabled={tickets.length < pageSize || loading} onClick={() => setPage(page + 1)}>Next</button></div>
+      </section>}
+      <footer>ResolveDesk · A little structure for every request.</footer>
+    </main>
+  </div>;
+}
+
+createRoot(document.getElementById('root')).render(<App />);

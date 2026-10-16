@@ -1,10 +1,14 @@
-FROM node:22-alpine AS build
+FROM node:22-alpine@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402 AS build
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY index.html vite.config.js ./
+COPY src ./src
 RUN npm run build
-FROM nginx:1.27-alpine
+FROM nginx:stable-alpine@sha256:970364228b1e4f932abc22d321932816782cca8a20b85a77552a7cfe9acfb3b5
 COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
+COPY nginx.conf /etc/nginx/nginx.conf
+USER 101
+EXPOSE 8080
+ENTRYPOINT ["nginx"]
+CMD ["-g", "daemon off;"]

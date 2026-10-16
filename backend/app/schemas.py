@@ -1,31 +1,51 @@
 from datetime import datetime
 from typing import Literal
-from pydantic import BaseModel, ConfigDict, Field
 
-Status = Literal["TODO", "IN_PROGRESS", "DONE"]
-Priority = Literal["LOW", "MEDIUM", "HIGH"]
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, model_validator
 
-class TaskCreate(BaseModel):
-    title: str = Field(min_length=1, max_length=200)
-    description: str = ""
+Status = Literal["OPEN", "IN_PROGRESS", "RESOLVED"]
+Priority = Literal["LOW", "MEDIUM", "HIGH", "URGENT"]
+
+
+class TicketCreate(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+
+    subject: str = Field(min_length=1, max_length=200)
+    description: str = Field(default="", max_length=10000)
+    requester_email: EmailStr = Field(max_length=254)
     priority: Priority = "MEDIUM"
-    status: Status = "TODO"
-    assignee: str = "Unassigned"
+    status: Status = "OPEN"
+    assignee: str = Field(default="Unassigned", min_length=1, max_length=120)
 
-class TaskUpdate(BaseModel):
-    title: str | None = Field(default=None, min_length=1, max_length=200)
-    description: str | None = None
+
+class TicketUpdate(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+
+    subject: str | None = Field(default=None, min_length=1, max_length=200)
+    description: str | None = Field(default=None, max_length=10000)
+    requester_email: EmailStr | None = Field(default=None, max_length=254)
     priority: Priority | None = None
     status: Status | None = None
-    assignee: str | None = None
+    assignee: str | None = Field(default=None, min_length=1, max_length=120)
 
-class TaskOut(TaskCreate):
+    @model_validator(mode="after")
+    def reject_null_fields(self):
+        if any(getattr(self, field) is None for field in self.model_fields_set):
+            raise ValueError("Ticket fields cannot be null")
+        return self
+
+
+class TicketOut(TicketCreate):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     created_at: datetime
-    model_config = ConfigDict(from_attributes=True)
+    updated_at: datetime
+
 
 class StatsOut(BaseModel):
     total: int
-    todo: int
+    open: int
     inProgress: int
-    done: int
+    resolved: int
+    urgent: int

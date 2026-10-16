@@ -30,6 +30,6 @@ test('request surfaces server failures instead of reporting success', async () =
 test('request handles unavailable servers with non-JSON responses', async () => {
   const original = global.fetch;
   global.fetch = async () => ({ ok: false, json: async () => { throw new Error('Invalid JSON'); } });
-  try { await assert.rejects(request('/tickets'), /Unable to save/); }
+  try { await assert.rejects(request('/tickets'), /The request failed/); }
   finally { global.fetch = original; }
 });

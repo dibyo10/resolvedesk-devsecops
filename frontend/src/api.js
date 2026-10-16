@@ -5,7 +5,7 @@ export async function request(path, options = {}) {
   });
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
-    throw new Error(typeof body.detail === 'string' ? body.detail : 'Unable to save your changes. Check your connection and try again.');
+    throw new Error(typeof body.detail === 'string' ? body.detail : 'The request failed. Check your connection and try again.');
   }
   return response.status === 204 ? null : response.json();
 }

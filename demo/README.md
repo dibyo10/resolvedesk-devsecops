@@ -7,6 +7,9 @@ This directory contains real browser captures, recorded command output, slides a
 - [Walkthrough video](walkthrough.mp4): slides first, live application and code overview, an actual new push and complete CI run, AWS evidence, Kubernetes, Helm, ArgoCD, Prometheus, Grafana and troubleshooting.
 - [PowerPoint](presentation.pptx) and [PDF slides](slides.pdf): ten slides.
 - [Editable slide content](slides.json) and [presentation runbook](walkthrough.txt).
+- [Exact presenter script (PDF)](demo-script.pdf) and [editable script](demo-script.md): slide-by-slide narration, precise screen actions, terminal commands, and the distinction between live local work and recorded cloud proof.
+
+The presentation PDF and presenter script were updated after teardown. The original walkthrough preserves the earlier genuine recording; its slides therefore precede the final cleanup update. Use the new deck with the script for your own narration and retain the recorded cloud footage as identified evidence.
 
 The recording preserves the live CI waiting period. Its final monitoring segment was recorded with a fresh login after Grafana restarted during setup; the obsolete login-screen segment was replaced with that genuine live capture. AWS Console images are identified as captured evidence in the narration.
 

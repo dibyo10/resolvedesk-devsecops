@@ -1,39 +1,12 @@
-ResolveDesk recorded walkthrough
+ResolveDesk presentation and recording guide
 
-Record slides first, then the live project. Keep credentials, tokens, account details and Secret values out of the recording. Use synthetic tickets. If a required step fails, show the failure and explain the limitation instead of replacing it with a static success claim.
+Read demo/demo-script.md for the exact narration, screen actions and commands.
+Use demo/demo-script.pdf as the printable presenter copy.
+Present demo/slides.pdf first, then follow the live local demonstration.
+AWS was destroyed after evidence capture; identify cloud footage as recorded.
+The existing demo/walkthrough.mp4 preserves the actual earlier CI and cloud session.
+See demo/README.md for all evidence, final cleanup verification and limitations.
 
-00:00–03:00 — Open demo/slides.pdf or demo/presentation.pptx and present all ten slides.
-Narration: ResolveDesk is a helpdesk ticket application. The application is small enough to understand, but its delivery path includes tests, container scans, infrastructure, GitOps and monitoring. The API separates routing, validation, business operations and storage. Readiness requires the migrated database to be available. State the final verified evidence on the last slide.
-
-03:00–04:30 — Open the application. Create a synthetic urgent ticket, assign it, move it to IN_PROGRESS, search for it, resolve it and delete it. Show the counters changing. Explain that no customer mail is sent and this demonstration does not include authentication.
-
-04:30–06:00 — Show backend/app/{routes,services,schemas,models}.py, backend/alembic/versions, frontend/src, Dockerfiles, Helm templates, Terraform and .github/workflows/ci-cd.yml. Show pytest and frontend test/build results. Explain that production startup uses migrations rather than automatic table creation.
-
-06:00–08:00 — Make a small legitimate change, commit and push. Open the matching GitHub Actions run and show tests, image builds, Trivy reports, temporary Kubernetes smoke test and image publication completing. Show the commit SHA and matching GHCR image tag. If the live run was captured separately, preserve the original footage and include the run URL in the recording or evidence index.
-
-08:00–10:00 — Show terraform plan and apply output. In the authenticated AWS console, show the project VPC, public/private subnets and EKS cluster/node group. Do not show Terraform state or credentials. If cloud access is blocked, show the precise error and mark the AWS section incomplete.
-
-10:00–11:30 — Run kubectl get pods,services,ingress,pvc -n resolvedesk. Show the migration Job completed and readiness passing. Run scripts/smoke-api.py against the deployed API. Demonstrate persistence by retaining one generated ticket, restarting the application/database normally, verifying the ticket and cleaning it up.
-
-11:30–13:00 — Open ArgoCD. Show the actual application, Git revision, Synced state and Healthy resources. Change a release value in Git, sync and show the new revision. Static YAML is not runtime GitOps proof.
-
-13:00–14:30 — Open Prometheus /targets and show the ResolveDesk target UP. Generate ticket API traffic, wait for two scrapes and show the Grafana ResolveDesk API dashboard with real request rate and latency data. Record the dashboards with visible labels and time range.
-
-14:30–15:30 — Show final validation evidence and explain limitations. Destroy temporary AWS infrastructure, then record terraform state list and AWS resource verification. A successful local application does not prove an EKS deployment, and a configured dashboard does not prove live monitoring.
-
-Artifact preparation
-
-Install presentation dependencies outside production requirements:
-uv pip install --python backend/.venv/bin/python python-pptx==1.0.2 reportlab==4.4.10
+Rebuild artifacts from the repository root:
 backend/.venv/bin/python scripts/build-presentation.py
-
-HTTP validation:
-python3 scripts/smoke-api.py --base-url http://localhost:8000
-
-Persistence verification across a normal service restart:
-python3 scripts/smoke-api.py --base-url http://localhost:8000 --persist-state /tmp/resolvedesk-smoke-state.json
-docker compose restart postgres backend
-Wait until /ready returns READY.
-python3 scripts/smoke-api.py --base-url http://localhost:8000 --verify-state /tmp/resolvedesk-smoke-state.json
-
-Record the actual UI and terminal using browser/desktop capture. Preserve audio or clear explanatory captions. Combine real captured clips only; do not synthesize deployment success. Export an MP4 under demo/ or upload it as a GitHub release asset if the file is too large for Git. Link the final video and slide deck from the README.
+backend/.venv/bin/python scripts/build-demo-script.py

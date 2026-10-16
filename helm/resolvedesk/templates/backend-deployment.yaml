@@ -27,26 +27,8 @@ spec:
             {{- include "resolvedesk.security" . | nindent 12 }}
           env:
             {{- include "resolvedesk.databaseEnv" . | nindent 12 }}
-          command: [python, -c]
-          args:
-            - |
-              import time
-              from alembic.config import Config
-              from alembic.script import ScriptDirectory
-              from sqlalchemy import create_engine, text
-              import os
-              engine = create_engine(os.environ["DATABASE_URL"])
-              expected = ScriptDirectory.from_config(Config("alembic.ini")).get_current_head()
-              for attempt in range(120):
-                  try:
-                      with engine.connect() as connection:
-                          if connection.execute(text("SELECT version_num FROM alembic_version")).scalar() == expected:
-                              break
-                  except Exception:
-                      pass
-                  time.sleep(2)
-              else:
-                  raise SystemExit("Database migration did not become ready")
+          command: [python, -m, app.wait_for_migration]
+
       containers:
         - name: backend
           image: "{{ .Values.backend.image }}:{{ .Values.backend.tag }}"

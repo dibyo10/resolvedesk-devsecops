@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "resolvedesk.name" . }}-migrate-{{ printf "%s:%s" .Values.backend.image .Values.backend.tag | sha256sum | trunc 12 }}
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  backoffLimit: 6
+  activeDeadlineSeconds: 300
+  template:
+    spec:
+      restartPolicy: OnFailure
+      automountServiceAccountToken: false
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: migrate
+          image: "{{ .Values.backend.image }}:{{ .Values.backend.tag }}"
+          securityContext:
+            {{- include "resolvedesk.security" . | nindent 12 }}
+          command: [alembic, upgrade, head]
+          env:
+            {{- include "resolvedesk.databaseEnv" . | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

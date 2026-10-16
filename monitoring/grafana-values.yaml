@@ -1,0 +1,6 @@
+grafana:
+  defaultDashboardsEnabled: true
+  persistence:
+    enabled: false
+  service:
+    type: ClusterIP

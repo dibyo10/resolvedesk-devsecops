@@ -1,6 +1,17 @@
 grafana:
   enabled: true
+  sidecar:
+    dashboards:
+      enabled: true
+      searchNamespace: ALL
 prometheus:
   prometheusSpec:
     serviceMonitorSelectorNilUsesHelmValues: false
     serviceMonitorNamespaceSelector: {}
+    retention: 2d
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        memory: 1Gi

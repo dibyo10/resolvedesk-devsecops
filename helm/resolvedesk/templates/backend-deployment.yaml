@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "resolvedesk.name" . }}-backend
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: backend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: backend
+    spec:
+      automountServiceAccountToken: false
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      initContainers:
+        - name: wait-for-migration
+          image: "{{ .Values.backend.image }}:{{ .Values.backend.tag }}"
+          securityContext:
+            {{- include "resolvedesk.security" . | nindent 12 }}
+          env:
+            {{- include "resolvedesk.databaseEnv" . | nindent 12 }}
+          command: [python, -c]
+          args:
+            - |
+              import time
+              from alembic.config import Config
+              from alembic.script import ScriptDirectory
+              from sqlalchemy import create_engine, text
+              import os
+              engine = create_engine(os.environ["DATABASE_URL"])
+              expected = ScriptDirectory.from_config(Config("alembic.ini")).get_current_head()
+              for attempt in range(120):
+                  try:
+                      with engine.connect() as connection:
+                          if connection.execute(text("SELECT version_num FROM alembic_version")).scalar() == expected:
+                              break
+                  except Exception:
+                      pass
+                  time.sleep(2)
+              else:
+                  raise SystemExit("Database migration did not become ready")
+      containers:
+        - name: backend
+          image: "{{ .Values.backend.image }}:{{ .Values.backend.tag }}"
+          securityContext:
+            {{- include "resolvedesk.security" . | nindent 12 }}
+          ports:
+            - name: http
+              containerPort: 8000
+
+          env:
+            {{- include "resolvedesk.databaseEnv" . | nindent 12 }}
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 15
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: resolvedesk
+description: ResolveDesk helpdesk application with PostgreSQL and observable API
+version: 1.0.0
+appVersion: "1.0.0"
+type: application

@@ -1,6 +1,5 @@
-replicaCount: 1
 ingress:
   enabled: true
-  host: taskboard.local
+  host: resolvedesk.local
 hpa:
   enabled: false

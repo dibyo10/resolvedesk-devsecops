@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: resolvedesk
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/dibyo10/resolvedesk-devsecops.git
+    targetRevision: main
+    path: helm/resolvedesk
+    helm:
+      releaseName: resolvedesk
+      valueFiles:
+        - values-dev.yaml
+        - values-release.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: resolvedesk
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,8 @@
+ingress:
+  enabled: true
+  host: resolvedesk.example.com
+postgres:
+  storageClass: gp3
+monitoring:
+  serviceMonitor:
+    enabled: true

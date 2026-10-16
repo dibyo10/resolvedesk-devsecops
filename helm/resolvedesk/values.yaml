@@ -1,0 +1,34 @@
+replicaCount: 2
+imagePullSecrets: []
+backend:
+  image: ghcr.io/dibyo10/resolvedesk-backend
+  tag: local
+frontend:
+  image: ghcr.io/dibyo10/resolvedesk-frontend
+  tag: local
+postgres:
+  image: postgres:16-alpine
+  database: resolvedesk
+  existingSecret: resolvedesk-database
+  storage: 5Gi
+  storageClass: ""
+ingress:
+  enabled: false
+  className: nginx
+  host: resolvedesk.local
+  tls: []
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 60
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+monitoring:
+  serviceMonitor:
+    enabled: false

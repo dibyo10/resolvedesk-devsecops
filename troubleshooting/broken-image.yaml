@@ -1,10 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: {name: resolvedesk-broken-image, namespace: resolvedesk}
+metadata:
+  name: broken-image
+  namespace: troubleshooting-lab
 spec:
   replicas: 1
-  selector: {matchLabels: {app: broken-image}}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: broken-image
   template:
-    metadata: {labels: {app: broken-image}}
+    metadata:
+      labels:
+        app: broken-image
     spec:
-      containers: [{name: backend, image: ghcr.io/example/resolvedesk-backend:does-not-exist}]
+      containers:
+        - name: backend
+          image: ghcr.io/dibyo10/resolvedesk-backend:does-not-exist
+          env:
+            - name: DATABASE_URL
+              value: "sqlite:///:memory:"
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000

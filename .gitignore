@@ -9,8 +9,16 @@ target/
 *.tfstate
 *.tfstate.*
 
-# Python
 __pycache__/
 *.py[cod]
 *.pyo
 *.db
+
+.venv/
+.env.*
+!.env.example
+.DS_Store
+*.tfplan
+.terraform-runtime/
+playwright-report/
+test-results/

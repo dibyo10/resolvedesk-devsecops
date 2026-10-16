@@ -1,0 +1,8 @@
+$ kubectl get svc,ingress -n resolvedesk
+NAME                           TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/resolvedesk-backend    ClusterIP   172.20.147.67    <none>        8000/TCP   5m21s
+service/resolvedesk-frontend   ClusterIP   172.20.44.145    <none>        80/TCP     5m21s
+service/resolvedesk-postgres   ClusterIP   172.20.236.117   <none>        5432/TCP   5m21s
+
+NAME                                    CLASS   HOSTS               ADDRESS          PORTS   AGE
+ingress.networking.k8s.io/resolvedesk   nginx   resolvedesk.local   172.20.115.182   80      5m20s

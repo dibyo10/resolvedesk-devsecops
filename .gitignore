@@ -4,6 +4,7 @@ node_modules/
 dist/
 target/
 *.log
+!demo/evidence/**/*.log
 .env
 .terraform/
 *.tfstate

@@ -1,0 +1,320 @@
+data.aws_availability_zones.available: Reading...
+module.eks.module.kms.data.aws_caller_identity.current[0]: Reading...
+module.eks.data.aws_caller_identity.current[0]: Reading...
+module.ebs_csi_irsa.data.aws_caller_identity.current: Reading...
+module.ebs_csi_irsa.data.aws_region.current: Reading...
+module.eks.data.aws_partition.current[0]: Reading...
+module.ebs_csi_irsa.data.aws_partition.current: Reading...
+module.eks.module.kms.data.aws_partition.current[0]: Reading...
+module.eks.data.aws_iam_policy_document.assume_role_policy[0]: Reading...
+module.eks.aws_cloudwatch_log_group.this[0]: Refreshing state... [id=/aws/eks/resolvedesk-eks/cluster]
+module.ebs_csi_irsa.data.aws_region.current: Read complete after 0s [id=ap-south-1]
+module.eks.module.kms.data.aws_partition.current[0]: Read complete after 0s [id=aws]
+module.ebs_csi_irsa.data.aws_partition.current: Read complete after 0s [id=aws]
+module.eks.data.aws_iam_policy_document.assume_role_policy[0]: Read complete after 0s [id=2830595799]
+module.eks.data.aws_partition.current[0]: Read complete after 0s [id=aws]
+module.vpc.aws_vpc.this[0]: Refreshing state... [id=vpc-0e09db5a98e792e76]
+module.eks.aws_iam_role.this[0]: Refreshing state... [id=resolvedesk-eks-cluster-20261016122427226700000001]
+module.eks.data.aws_iam_policy_document.custom[0]: Reading...
+module.ebs_csi_irsa.data.aws_iam_policy_document.ebs_csi[0]: Reading...
+module.eks.data.aws_iam_policy_document.custom[0]: Read complete after 0s [id=513122117]
+module.eks.aws_iam_policy.custom[0]: Refreshing state... [id=arn:aws:iam::093529868648:policy/resolvedesk-eks-cluster-20261016122427227500000003]
+module.ebs_csi_irsa.data.aws_iam_policy_document.ebs_csi[0]: Read complete after 0s [id=4189668531]
+module.ebs_csi_irsa.aws_iam_policy.ebs_csi[0]: Refreshing state... [id=arn:aws:iam::093529868648:policy/AmazonEKS_EBS_CSI_Policy-20261016122427228200000004]
+module.eks.data.aws_caller_identity.current[0]: Read complete after 0s [id=093529868648]
+module.eks.data.aws_iam_session_context.current[0]: Reading...
+module.eks.data.aws_iam_session_context.current[0]: Read complete after 0s [id=arn:aws:iam::093529868648:user/dibyo.chakraborty]
+module.eks.module.kms.data.aws_caller_identity.current[0]: Read complete after 0s [id=093529868648]
+module.ebs_csi_irsa.data.aws_caller_identity.current: Read complete after 0s [id=093529868648]
+data.aws_availability_zones.available: Read complete after 0s [id=ap-south-1]
+module.vpc.aws_default_route_table.default[0]: Refreshing state... [id=rtb-0371c7d6dd113995d]
+module.vpc.aws_default_network_acl.this[0]: Refreshing state... [id=acl-0c563160fc7d84e73]
+module.vpc.aws_default_security_group.this[0]: Refreshing state... [id=sg-026dae766db19fa8b]
+module.vpc.aws_internet_gateway.this[0]: Refreshing state... [id=igw-0afc2a4fefd36f6b7]
+module.vpc.aws_route_table.private[0]: Refreshing state... [id=rtb-0119807d46a535f00]
+module.vpc.aws_route_table.public[0]: Refreshing state... [id=rtb-0ece9e0a2002ad874]
+module.eks.aws_security_group.cluster[0]: Refreshing state... [id=sg-0004ee142830b55dd]
+module.vpc.aws_subnet.public[0]: Refreshing state... [id=subnet-06e7b32777c0692ee]
+module.vpc.aws_subnet.public[1]: Refreshing state... [id=subnet-027f663e820bba3e9]
+module.eks.aws_security_group.node[0]: Refreshing state... [id=sg-05264b22b6f7a6dba]
+module.vpc.aws_subnet.private[0]: Refreshing state... [id=subnet-0c10151d1a7ea2544]
+module.vpc.aws_subnet.private[1]: Refreshing state... [id=subnet-0baf17d345174b594]
+module.vpc.aws_route.public_internet_gateway[0]: Refreshing state... [id=r-rtb-0ece9e0a2002ad8741080289494]
+module.vpc.aws_route_table_association.public[1]: Refreshing state... [id=rtbassoc-0cba7236e545ea04e]
+module.vpc.aws_route_table_association.public[0]: Refreshing state... [id=rtbassoc-0a6d014e268558219]
+module.eks.module.eks_managed_node_group["main"].data.aws_caller_identity.current: Reading...
+module.eks.module.eks_managed_node_group["main"].data.aws_partition.current: Reading...
+module.eks.module.eks_managed_node_group["main"].data.aws_partition.current: Read complete after 0s [id=aws]
+module.eks.aws_security_group_rule.node["ingress_cluster_9443_webhook"]: Refreshing state... [id=sgrule-2313112987]
+module.eks.aws_security_group_rule.node["ingress_cluster_443"]: Refreshing state... [id=sgrule-3747271968]
+module.eks.aws_security_group_rule.node["ingress_nodes_ephemeral"]: Refreshing state... [id=sgrule-1560195728]
+module.eks.aws_security_group_rule.node["ingress_cluster_kubelet"]: Refreshing state... [id=sgrule-3036719558]
+module.eks.aws_security_group_rule.node["ingress_self_coredns_tcp"]: Refreshing state... [id=sgrule-417576450]
+module.eks.module.eks_managed_node_group["main"].data.aws_caller_identity.current: Read complete after 1s [id=093529868648]
+module.eks.aws_security_group_rule.node["ingress_self_coredns_udp"]: Refreshing state... [id=sgrule-3166442989]
+module.eks.aws_security_group_rule.node["egress_all"]: Refreshing state... [id=sgrule-36967995]
+module.eks.aws_security_group_rule.node["ingress_cluster_6443_webhook"]: Refreshing state... [id=sgrule-4263658097]
+module.eks.aws_security_group_rule.node["ingress_cluster_8443_webhook"]: Refreshing state... [id=sgrule-3984490064]
+module.eks.aws_security_group_rule.node["ingress_cluster_4443_webhook"]: Refreshing state... [id=sgrule-929048039]
+module.eks.module.eks_managed_node_group["main"].data.aws_iam_policy_document.assume_role_policy[0]: Reading...
+module.eks.aws_security_group_rule.cluster["ingress_nodes_443"]: Refreshing state... [id=sgrule-1048310628]
+module.eks.module.eks_managed_node_group["main"].data.aws_iam_policy_document.assume_role_policy[0]: Read complete after 0s [id=2560088296]
+module.vpc.aws_route_table_association.private[0]: Refreshing state... [id=rtbassoc-0a63c33c1ba7e2a4d]
+module.vpc.aws_route_table_association.private[1]: Refreshing state... [id=rtbassoc-0ac7c02fe094c24d2]
+module.eks.module.eks_managed_node_group["main"].aws_iam_role.this[0]: Refreshing state... [id=main-eks-node-group-20261016122427226700000002]
+module.eks.aws_iam_role_policy_attachment.custom[0]: Refreshing state... [id=resolvedesk-eks-cluster-20261016122427226700000001-20261016122430161300000009]
+module.eks.aws_iam_role_policy_attachment.this["AmazonEKSClusterPolicy"]: Refreshing state... [id=resolvedesk-eks-cluster-20261016122427226700000001-20261016122429843000000007]
+module.eks.aws_iam_role_policy_attachment.this["AmazonEKSVPCResourceController"]: Refreshing state... [id=resolvedesk-eks-cluster-20261016122427226700000001-20261016122429826400000005]
+module.eks.module.kms.data.aws_iam_policy_document.this[0]: Reading...
+module.eks.module.kms.data.aws_iam_policy_document.this[0]: Read complete after 0s [id=4006464810]
+module.eks.module.kms.aws_kms_key.this[0]: Refreshing state... [id=b9c57150-1ea7-4d89-8d09-fcd72477d1fe]
+module.eks.module.kms.aws_kms_alias.this["cluster"]: Refreshing state... [id=alias/eks/resolvedesk-eks]
+module.eks.aws_iam_policy.cluster_encryption[0]: Refreshing state... [id=arn:aws:iam::093529868648:policy/resolvedesk-eks-cluster-ClusterEncryption2026101612245907450000000f]
+module.eks.aws_eks_cluster.this[0]: Refreshing state... [id=resolvedesk-eks]
+module.eks.aws_eks_access_entry.this["cluster_creator"]: Refreshing state... [id=resolvedesk-eks:arn:aws:iam::093529868648:user/dibyo.chakraborty]
+module.eks.data.tls_certificate.this[0]: Reading...
+module.eks.time_sleep.this[0]: Refreshing state... [id=2026-10-16T12:34:06Z]
+module.eks.module.eks_managed_node_group["main"].module.user_data.null_resource.validate_cluster_service_cidr: Refreshing state... [id=3022372846535547399]
+module.eks.module.eks_managed_node_group["main"].aws_iam_role_policy_attachment.this["AmazonEC2ContainerRegistryReadOnly"]: Refreshing state... [id=main-eks-node-group-20261016122427226700000002-20261016122429843000000008]
+module.eks.module.eks_managed_node_group["main"].aws_iam_role_policy_attachment.this["AmazonEKS_CNI_Policy"]: Refreshing state... [id=main-eks-node-group-20261016122427226700000002-2026101612243020870000000a]
+module.eks.module.eks_managed_node_group["main"].aws_iam_role_policy_attachment.this["AmazonEKSWorkerNodePolicy"]: Refreshing state... [id=main-eks-node-group-20261016122427226700000002-20261016122429835300000006]
+module.eks.data.tls_certificate.this[0]: Read complete after 0s [id=1e3a331631939a1ae4a625cd4244a4963dabbfa2]
+module.eks.aws_iam_openid_connect_provider.oidc_provider[0]: Refreshing state... [id=arn:aws:iam::093529868648:oidc-provider/oidc.eks.ap-south-1.amazonaws.com/id/DF93969BD4D8AFEB2BC5D57D91923B8A]
+module.eks.aws_eks_access_policy_association.this["cluster_creator_admin"]: Refreshing state... [id=resolvedesk-eks#arn:aws:iam::093529868648:user/dibyo.chakraborty#arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy]
+module.eks.aws_iam_role_policy_attachment.cluster_encryption[0]: Refreshing state... [id=resolvedesk-eks-cluster-20261016122427226700000001-20261016122500424500000010]
+module.eks.module.eks_managed_node_group["main"].aws_launch_template.this[0]: Refreshing state... [id=lt-0218d7d0c1352d458]
+module.ebs_csi_irsa.data.aws_iam_policy_document.this[0]: Reading...
+module.ebs_csi_irsa.data.aws_iam_policy_document.this[0]: Read complete after 0s [id=2248615014]
+module.ebs_csi_irsa.aws_iam_role.this[0]: Refreshing state... [id=resolvedesk-eks-ebs-csi]
+module.eks.module.eks_managed_node_group["main"].aws_eks_node_group.this[0]: Refreshing state... [id=resolvedesk-eks:main-20261016123412727700000015]
+module.ebs_csi_irsa.aws_iam_role_policy_attachment.ebs_csi[0]: Refreshing state... [id=resolvedesk-eks-ebs-csi-20261016123340744400000011]
+module.eks.data.aws_eks_addon_version.this["vpc-cni"]: Reading...
+module.eks.data.aws_eks_addon_version.this["aws-ebs-csi-driver"]: Reading...
+module.eks.data.aws_eks_addon_version.this["coredns"]: Reading...
+module.eks.data.aws_eks_addon_version.this["kube-proxy"]: Reading...
+module.eks.data.aws_eks_addon_version.this["coredns"]: Read complete after 0s [id=coredns]
+module.eks.data.aws_eks_addon_version.this["aws-ebs-csi-driver"]: Read complete after 1s [id=aws-ebs-csi-driver]
+module.eks.data.aws_eks_addon_version.this["vpc-cni"]: Read complete after 1s [id=vpc-cni]
+module.eks.data.aws_eks_addon_version.this["kube-proxy"]: Read complete after 1s [id=kube-proxy]
+module.eks.aws_eks_addon.before_compute["vpc-cni"]: Refreshing state... [id=resolvedesk-eks:vpc-cni]
+
+Note: Objects have changed outside of Terraform
+
+Terraform detected the following changes made outside of Terraform since the
+last "terraform apply" which may have affected this plan:
+
+  # module.eks.module.eks_managed_node_group["main"].aws_eks_node_group.this[0] has changed
+  ~ resource "aws_eks_node_group" "this" {
+      + arn                    = "arn:aws:eks:ap-south-1:093529868648:nodegroup/resolvedesk-eks/main-20261016123412727700000015/78d0a25a-5479-df34-0f85-1c1721eee874"
+        id                     = "resolvedesk-eks:main-20261016123412727700000015"
+      + resources              = []
+      + status                 = "CREATING"
+        tags                   = {
+            "Name" = "main"
+        }
+        # (8 unchanged attributes hidden)
+
+        # (4 unchanged blocks hidden)
+    }
+
+
+Unless you have made equivalent changes to your configuration, or ignored the
+relevant attributes using ignore_changes, the following plan may include
+actions to undo or respond to these changes.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+  ~ update in-place
++/- create replacement and then destroy
+
+Terraform will perform the following actions:
+
+  # module.eks.aws_eks_addon.this["aws-ebs-csi-driver"] will be created
+  + resource "aws_eks_addon" "this" {
+      + addon_name                  = "aws-ebs-csi-driver"
+      + addon_version               = "v1.67.0-eksbuild.1"
+      + arn                         = (known after apply)
+      + cluster_name                = "resolvedesk-eks"
+      + configuration_values        = (known after apply)
+      + created_at                  = (known after apply)
+      + id                          = (known after apply)
+      + modified_at                 = (known after apply)
+      + preserve                    = true
+      + resolve_conflicts_on_create = "OVERWRITE"
+      + resolve_conflicts_on_update = "OVERWRITE"
+      + service_account_role_arn    = "arn:aws:iam::093529868648:role/resolvedesk-eks-ebs-csi"
+      + tags_all                    = {
+          + "Environment" = "dev"
+          + "ManagedBy"   = "terraform"
+          + "Project"     = "resolvedesk"
+        }
+
+      + timeouts {}
+    }
+
+  # module.eks.aws_eks_addon.this["coredns"] will be created
+  + resource "aws_eks_addon" "this" {
+      + addon_name                  = "coredns"
+      + addon_version               = "v1.13.2-eksbuild.50"
+      + arn                         = (known after apply)
+      + cluster_name                = "resolvedesk-eks"
+      + configuration_values        = (known after apply)
+      + created_at                  = (known after apply)
+      + id                          = (known after apply)
+      + modified_at                 = (known after apply)
+      + preserve                    = true
+      + resolve_conflicts_on_create = "OVERWRITE"
+      + resolve_conflicts_on_update = "OVERWRITE"
+      + tags_all                    = {
+          + "Environment" = "dev"
+          + "ManagedBy"   = "terraform"
+          + "Project"     = "resolvedesk"
+        }
+
+      + timeouts {}
+    }
+
+  # module.eks.aws_eks_addon.this["kube-proxy"] will be created
+  + resource "aws_eks_addon" "this" {
+      + addon_name                  = "kube-proxy"
+      + addon_version               = "v1.35.3-eksbuild.29"
+      + arn                         = (known after apply)
+      + cluster_name                = "resolvedesk-eks"
+      + configuration_values        = (known after apply)
+      + created_at                  = (known after apply)
+      + id                          = (known after apply)
+      + modified_at                 = (known after apply)
+      + preserve                    = true
+      + resolve_conflicts_on_create = "OVERWRITE"
+      + resolve_conflicts_on_update = "OVERWRITE"
+      + tags_all                    = {
+          + "Environment" = "dev"
+          + "ManagedBy"   = "terraform"
+          + "Project"     = "resolvedesk"
+        }
+
+      + timeouts {}
+    }
+
+  # module.vpc.aws_route_table.private[0] will be updated in-place
+  ~ resource "aws_route_table" "private" {
+        id               = "rtb-0119807d46a535f00"
+      ~ tags             = {
+          ~ "Name" = "resolvedesk-eks-vpc-private" -> "resolvedesk-eks-vpc-private-ap-south-1a"
+        }
+      ~ tags_all         = {
+          ~ "Name"        = "resolvedesk-eks-vpc-private" -> "resolvedesk-eks-vpc-private-ap-south-1a"
+            # (3 unchanged elements hidden)
+        }
+        # (5 unchanged attributes hidden)
+    }
+
+  # module.vpc.aws_route_table.private[1] will be created
+  + resource "aws_route_table" "private" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = (known after apply)
+      + tags             = {
+          + "Name" = "resolvedesk-eks-vpc-private-ap-south-1b"
+        }
+      + tags_all         = {
+          + "Environment" = "dev"
+          + "ManagedBy"   = "terraform"
+          + "Name"        = "resolvedesk-eks-vpc-private-ap-south-1b"
+          + "Project"     = "resolvedesk"
+        }
+      + vpc_id           = "vpc-0e09db5a98e792e76"
+    }
+
+  # module.vpc.aws_route_table_association.private[1] will be updated in-place
+  ~ resource "aws_route_table_association" "private" {
+        id             = "rtbassoc-0ac7c02fe094c24d2"
+      ~ route_table_id = "rtb-0119807d46a535f00" -> (known after apply)
+        # (2 unchanged attributes hidden)
+    }
+
+  # module.vpc.aws_subnet.public[0] will be updated in-place
+  ~ resource "aws_subnet" "public" {
+        id                                             = "subnet-06e7b32777c0692ee"
+      ~ map_public_ip_on_launch                        = false -> true
+        tags                                           = {
+            "Name"                   = "resolvedesk-eks-vpc-public-ap-south-1a"
+            "kubernetes.io/role/elb" = "1"
+        }
+        # (19 unchanged attributes hidden)
+    }
+
+  # module.vpc.aws_subnet.public[1] will be updated in-place
+  ~ resource "aws_subnet" "public" {
+        id                                             = "subnet-027f663e820bba3e9"
+      ~ map_public_ip_on_launch                        = false -> true
+        tags                                           = {
+            "Name"                   = "resolvedesk-eks-vpc-public-ap-south-1b"
+            "kubernetes.io/role/elb" = "1"
+        }
+        # (19 unchanged attributes hidden)
+    }
+
+  # module.eks.module.eks_managed_node_group["main"].aws_eks_node_group.this[0] is tainted, so must be replaced
++/- resource "aws_eks_node_group" "this" {
+      ~ arn                    = "arn:aws:eks:ap-south-1:093529868648:nodegroup/resolvedesk-eks/main-20261016123412727700000015/78d0a25a-5479-df34-0f85-1c1721eee874" -> (known after apply)
+      ~ capacity_type          = "ON_DEMAND" -> (known after apply)
+      ~ disk_size              = 0 -> (known after apply)
+      ~ id                     = "resolvedesk-eks:main-20261016123412727700000015" -> (known after apply)
+      - labels                 = {} -> null
+      ~ node_group_name        = "main-20261016123412727700000015" -> (known after apply)
+      ~ release_version        = "1.35.8-20261012" -> (known after apply)
+      ~ resources              = [] -> (known after apply)
+      ~ status                 = "CREATING" -> (known after apply)
+      ~ subnet_ids             = [
+          - "subnet-0baf17d345174b594",
+          - "subnet-0c10151d1a7ea2544",
+          + "subnet-027f663e820bba3e9",
+          + "subnet-06e7b32777c0692ee",
+        ]
+        tags                   = {
+            "Name" = "main"
+        }
+        # (7 unchanged attributes hidden)
+
+      ~ launch_template {
+            id      = "lt-0218d7d0c1352d458"
+          ~ name    = "main-20261016123406573900000013" -> (known after apply)
+            # (1 unchanged attribute hidden)
+        }
+
+      ~ node_repair_config (known after apply)
+
+      ~ update_config {
+          - max_unavailable            = 0 -> null
+            # (1 unchanged attribute hidden)
+        }
+
+        # (2 unchanged blocks hidden)
+    }
+
+Plan: 5 to add, 4 to change, 1 to destroy.
+
+Warning: Deprecated value used
+
+  on .terraform/modules/eks/outputs.tf line 218, in output "cluster_addons":
+ 218:   value       = merge(aws_eks_addon.this, aws_eks_addon.before_compute)
+
+  The deprecation originates from module.eks.aws_eks_addon.this["aws-ebs-csi-driver"].resolve_conflicts
+
+Deprecated resource attribute "resolve_conflicts" used. Refer to the provider
+documentation for details.
+
+(and 3 more similar warnings elsewhere)
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: resolvedesk.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "resolvedesk.tfplan"

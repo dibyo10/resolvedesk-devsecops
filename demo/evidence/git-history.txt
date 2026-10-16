@@ -1,0 +1,18 @@
+$ git log --oneline -15
+7c908fb docs: add reproducible deployment guides and capstone presentation
+8e9584d fix: expose complete ticket details and actions on mobile screens
+6810f7f refactor: isolate and test Kubernetes migration readiness checks
+23f2924 infra: provision restricted EKS networking and persistent storage with Terraform
+ef0d1bf Gate GHCR publication on tests, strict vulnerability scans and Helm smoke tests
+e9b87f7 Containerize ResolveDesk with nonroot runtimes and health-gated Compose
+dc65810 feat: build responsive helpdesk queue with ticket editing and search
+532ac45 test: isolate ticket API coverage and add versioned ticket migration
+f3747f7 feat: implement validated helpdesk ticket API and queue statistics
+9888ee0 docs: preserve capstone rubric and isolate local build artifacts
+bab00cc submission.md added
+0bb8040 submission.md added
+0b52425 cicd updated
+919bac4 fix(ci): fix port-forward race condition with kubectl wait + readinessProbe
+97e133c ci: use kind-action for deploy job + add k8s manifests
+
+Exit code: 0

@@ -1,0 +1,25 @@
+Command: terraform destroy -input=false -no-color -auto-approve
+Source: terraform-destroy.log (final output excerpt)
+
+module.eks.aws_security_group_rule.cluster["ingress_nodes_443"]: Destroying... [id=sgrule-1048310628]
+module.eks.aws_cloudwatch_log_group.this[0]: Destroying... [id=/aws/eks/resolvedesk-eks/cluster]
+module.eks.aws_iam_role.this[0]: Destroying... [id=resolvedesk-eks-cluster-20261016122427226700000001]
+module.eks.aws_cloudwatch_log_group.this[0]: Destruction complete after 1s
+module.eks.aws_security_group_rule.cluster["ingress_nodes_443"]: Destruction complete after 1s
+module.eks.aws_security_group_rule.node["ingress_cluster_9443_webhook"]: Destruction complete after 3s
+module.eks.aws_security_group_rule.node["ingress_nodes_ephemeral"]: Destruction complete after 3s
+module.eks.aws_iam_role.this[0]: Destruction complete after 2s
+module.eks.aws_security_group_rule.node["ingress_cluster_443"]: Destruction complete after 4s
+module.eks.aws_security_group_rule.node["ingress_cluster_kubelet"]: Destruction complete after 5s
+module.eks.aws_security_group_rule.node["ingress_cluster_4443_webhook"]: Destruction complete after 4s
+module.eks.aws_security_group_rule.node["ingress_cluster_6443_webhook"]: Destruction complete after 5s
+module.eks.module.eks_managed_node_group["main"].aws_eks_node_group.this[0]: Still destroying... [id=resolvedesk-eks:main-20261016123840374800000002, 09m10s elapsed]
+module.eks.aws_security_group_rule.node["ingress_self_coredns_tcp"]: Destruction complete after 5s
+module.eks.aws_security_group.cluster[0]: Destroying... [id=sg-0004ee142830b55dd]
+module.eks.aws_security_group.node[0]: Destroying... [id=sg-05264b22b6f7a6dba]
+module.eks.aws_security_group.cluster[0]: Destruction complete after 1s
+module.eks.aws_security_group.node[0]: Destruction complete after 1s
+module.vpc.aws_vpc.this[0]: Destroying... [id=vpc-0e09db5a98e792e76]
+module.vpc.aws_vpc.this[0]: Destruction complete after 1s
+
+Destroy complete! Resources: 59 destroyed.

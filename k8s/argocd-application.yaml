@@ -20,9 +20,16 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: resolvedesk
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: resolvedesk-backend
+      jsonPointers:
+        - /spec/replicas
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - RespectIgnoreDifferences=true

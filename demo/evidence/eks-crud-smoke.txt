@@ -1,0 +1,7 @@
+Live EKS ingress Host: resolvedesk.local via http://127.0.0.1:8088
+POST ticket: 201
+GET ticket: 200
+PUT status RESOLVED: 200
+DELETE ticket: 204
+GET list: 200; deleted ticket absent
+All assertions passed. Existing demonstration tickets preserved.

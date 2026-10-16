@@ -1,0 +1,14 @@
+[
+  {
+    "pv": "pvc-de1e6b90-eb09-4540-b377-80581885e68c",
+    "claim": "data-resolvedesk-postgres-0",
+    "namespace": "resolvedesk",
+    "volumeId": "vol-0d513e74b738b725f"
+  },
+  {
+    "pv": "pvc-e8bac8b0-6b82-49ed-89e8-0c5a661e1186",
+    "claim": "data-resolvedesk-postgres-0",
+    "namespace": "campusdesk",
+    "volumeId": "vol-0d2b82f87b684b0bd"
+  }
+]

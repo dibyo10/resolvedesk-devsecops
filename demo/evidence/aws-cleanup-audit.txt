@@ -1,0 +1,19 @@
+AWS cleanup verification
+Checked UTC: 2026-10-16T13:12:28.086406+00:00
+Region: ap-south-1
+Shared cluster: resolvedesk-eks
+
+PASS all owned instances terminated
+PASS all recorded ebs volumes deleted
+PASS no project tagged ebs volumes
+PASS eks cluster deleted
+PASS vpc deleted
+PASS no vpc network interfaces
+PASS no project elastic ips
+PASS no active vpc nat gateways
+PASS no cluster autoscaling groups
+PASS terraform state empty
+PASS owned kms key scheduled for deletion
+
+Owned KMS encryption key is PendingDeletion, scheduled for 2026-11-15T18:41:33.463000+05:30. AWS enforces the KMS waiting period; Terraform no longer manages active infrastructure.
+Unrelated account resources were untouched.

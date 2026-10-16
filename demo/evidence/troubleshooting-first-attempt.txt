@@ -1,0 +1,540 @@
+$ kubectl get namespace -o json
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T12:35:28Z",
+                "labels": {
+                    "kubernetes.io/metadata.name": "argocd",
+                    "name": "argocd"
+                },
+                "name": "argocd",
+                "resourceVersion": "1228",
+                "uid": "26f0f5e3-4a56-4cdf-948c-bcad170e90a1"
+            },
+            "spec": {
+                "finalizers": [
+                    "kubernetes"
+                ]
+            },
+            "status": {
+                "phase": "Active"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T12:30:30Z",
+                "labels": {
+                    "kubernetes.io/metadata.name": "default"
+                },
+                "name": "default",
+                "resourceVersion": "32",
+                "uid": "109b9c80-bdd2-48c8-9797-6dff797fb692"
+            },
+            "spec": {
+                "finalizers": [
+                    "kubernetes"
+                ]
+            },
+            "status": {
+                "phase": "Active"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T12:34:07Z",
+                "labels": {
+                    "kubernetes.io/metadata.name": "ingress-nginx",
+                    "name": "ingress-nginx"
+                },
+                "name": "ingress-nginx",
+                "resourceVersion": "944",
+                "uid": "f551f6d3-3182-4112-84e6-c3d5d2c32cce"
+            },
+            "spec": {
+                "finalizers": [
+                    "kubernetes"
+                ]
+            },
+            "status": {
+                "phase": "Active"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T12:30:30Z",
+                "labels": {
+                    "kubernetes.io/metadata.name": "kube-node-lease"
+                },
+                "name": "kube-node-lease",
+                "resourceVersion": "38",
+                "uid": "0e941126-ae19-46a5-b872-efc2b01f3a53"
+            },
+            "spec": {
+                "finalizers": [
+                    "kubernetes"
+                ]
+            },
+            "status": {
+                "phase": "Active"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T12:30:30Z",
+                "labels": {
+                    "kubernetes.io/metadata.name": "kube-public"
+                },
+                "name": "kube-public",
+                "resourceVersion": "21",
+                "uid": "8ba9435d-077c-40bf-bf3b-1f5749c9f9ec"
+            },
+            "spec": {
+                "finalizers": [
+                    "kubernetes"
+                ]
+            },
+            "status": {
+                "phase": "Active"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T12:30:30Z",
+                "labels": {
+                    "kubernetes.io/metadata.name": "kube-system"
+                },
+                "name": "kube-system",
+                "resourceVersion": "10",
+                "uid": "af838d3b-e566-463e-ae5e-04f460a79c56"
+            },
+            "spec": {
+                "finalizers": [
+                    "kubernetes"
+                ]
+            },
+            "status": {
+                "phase": "Active"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T12:35:45Z",
+                "labels": {
+                    "kubernetes.io/metadata.name": "monitoring",
+                    "name": "monitoring"
+                },
+                "name": "monitoring",
+                "resourceVersion": "1299",
+                "uid": "2ed1f41a-cbe3-4e9d-8f5d-38777da6e467"
+            },
+            "spec": {
+                "finalizers": [
+                    "kubernetes"
+                ]
+            },
+            "status": {
+                "phase": "Active"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}
+$ kubectl create namespace troubleshooting-lab
+namespace/troubleshooting-lab created
+$ kubectl apply -f /Users/dibyochakraborty/devsecops-python/troubleshooting/broken-image.yaml
+deployment.apps/broken-image created
+$ kubectl get pods -n troubleshooting-lab -o json
+{
+    "apiVersion": "v1",
+    "items": [],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}
+$ kubectl get pods -n troubleshooting-lab -o json
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "creationTimestamp": "2026-10-16T12:40:16Z",
+                "generateName": "broken-image-5bf5d956ff-",
+                "generation": 1,
+                "labels": {
+                    "app": "broken-image",
+                    "pod-template-hash": "5bf5d956ff",
+                    "topology.kubernetes.io/region": "ap-south-1",
+                    "topology.kubernetes.io/zone": "ap-south-1b"
+                },
+                "name": "broken-image-5bf5d956ff-zghqd",
+                "namespace": "troubleshooting-lab",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "broken-image-5bf5d956ff",
+                        "uid": "5f6d75ca-035e-4ce5-ad35-595ed08abb1c"
+                    }
+                ],
+                "resourceVersion": "2850",
+                "uid": "b84b9591-a690-46b1-8ec4-0bf0b037c2a3"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "DATABASE_URL",
+                                "value": "sqlite:///:memory:"
+                            }
+                        ],
+                        "image": "ghcr.io/dibyo10/resolvedesk-backend:does-not-exist",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "backend",
+                        "ports": [
+                            {
+                                "containerPort": 8000,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/health",
+                                "port": 8000,
+                                "scheme": "HTTP"
+                            },
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "kube-api-access-6s4v2",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "ip-10-20-102-148.ap-south-1.compute.internal",
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "kube-api-access-6s4v2",
+                        "projected": {
+                            "defaultMode": 420,
+                            "sources": [
+                                {
+                                    "serviceAccountToken": {
+                                        "expirationSeconds": 3607,
+                                        "path": "token"
+                                    }
+                                },
+                                {
+                                    "configMap": {
+                                        "items": [
+                                            {
+                                                "key": "ca.crt",
+                                                "path": "ca.crt"
+                                            }
+                                        ],
+                                        "name": "kube-root-ca.crt"
+                                    }
+                                },
+                                {
+                                    "downwardAPI": {
+                                        "items": [
+                                            {
+                                                "fieldRef": {
+                                                    "apiVersion": "v1",
+                                                    "fieldPath": "metadata.namespace"
+                                                },
+                                                "path": "namespace"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-16T12:40:18Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodReadyToStartContainers"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-16T12:40:16Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-16T12:40:16Z",
+                        "message": "containers with unready status: [backend]",
+                        "observedGeneration": 1,
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-16T12:40:16Z",
+                        "message": "containers with unready status: [backend]",
+                        "observedGeneration": 1,
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-16T12:40:16Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "image": "ghcr.io/dibyo10/resolvedesk-backend:does-not-exist",
+                        "imageID": "",
+                        "lastState": {},
+                        "name": "backend",
+                        "ready": false,
+                        "restartCount": 0,
+                        "started": false,
+                        "state": {
+                            "waiting": {
+                                "message": "rpc error: code = NotFound desc = failed to pull and unpack image \"ghcr.io/dibyo10/resolvedesk-backend:does-not-exist\": failed to resolve reference \"ghcr.io/dibyo10/resolvedesk-backend:does-not-exist\": ghcr.io/dibyo10/resolvedesk-backend:does-not-exist: not found",
+                                "reason": "ErrImagePull"
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "kube-api-access-6s4v2",
+                                "readOnly": true,
+                                "recursiveReadOnly": "Disabled"
+                            }
+                        ]
+                    }
+                ],
+                "hostIP": "10.20.102.148",
+                "hostIPs": [
+                    {
+                        "ip": "10.20.102.148"
+                    }
+                ],
+                "observedGeneration": 1,
+                "phase": "Pending",
+                "podIP": "10.20.102.104",
+                "podIPs": [
+                    {
+                        "ip": "10.20.102.104"
+                    }
+                ],
+                "qosClass": "BestEffort",
+                "startTime": "2026-10-16T12:40:16Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}
+Observed image pull failure for a nonexistent tag
+$ kubectl describe pods -n troubleshooting-lab
+Name:             broken-image-5bf5d956ff-zghqd
+Namespace:        troubleshooting-lab
+Priority:         0
+Service Account:  default
+Node:             ip-10-20-102-148.ap-south-1.compute.internal/10.20.102.148
+Start Time:       Fri, 16 Oct 2026 18:10:16 +0530
+Labels:           app=broken-image
+                  pod-template-hash=5bf5d956ff
+                  topology.kubernetes.io/region=ap-south-1
+                  topology.kubernetes.io/zone=ap-south-1b
+Annotations:      <none>
+Status:           Pending
+IP:               10.20.102.104
+IPs:
+  IP:           10.20.102.104
+Controlled By:  ReplicaSet/broken-image-5bf5d956ff
+Containers:
+  backend:
+    Container ID:   
+    Image:          ghcr.io/dibyo10/resolvedesk-backend:does-not-exist
+    Image ID:       
+    Port:           8000/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ErrImagePull
+    Ready:          False
+    Restart Count:  0
+    Readiness:      http-get http://:8000/health delay=0s timeout=1s period=10s successThreshold=1 failureThreshold=3
+    Environment:
+      DATABASE_URL:  sqlite:///:memory:
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-6s4v2 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-6s4v2:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age   From               Message
+  ----     ------     ----  ----               -------
+  Normal   Scheduled  5s    default-scheduler  Successfully assigned troubleshooting-lab/broken-image-5bf5d956ff-zghqd to ip-10-20-102-148.ap-south-1.compute.internal
+  Normal   Pulling    3s    kubelet            spec.containers{backend}: Pulling image "ghcr.io/dibyo10/resolvedesk-backend:does-not-exist"
+  Warning  Failed     3s    kubelet            spec.containers{backend}: Failed to pull image "ghcr.io/dibyo10/resolvedesk-backend:does-not-exist": rpc error: code = NotFound desc = failed to pull and unpack image "ghcr.io/dibyo10/resolvedesk-backend:does-not-exist": failed to resolve reference "ghcr.io/dibyo10/resolvedesk-backend:does-not-exist": ghcr.io/dibyo10/resolvedesk-backend:does-not-exist: not found
+  Warning  Failed     3s    kubelet            spec.containers{backend}: Error: ErrImagePull
+  Normal   BackOff    3s    kubelet            spec.containers{backend}: Back-off pulling image "ghcr.io/dibyo10/resolvedesk-backend:does-not-exist"
+  Warning  Failed     3s    kubelet            spec.containers{backend}: Error: ImagePullBackOff
+$ kubectl set image deployment/broken-image backend=ghcr.io/dibyo10/resolvedesk-backend:ffaa47fee9ffcf2f9e21cd8cd181376ed5d3cf17 -n troubleshooting-lab
+deployment.apps/broken-image image updated
+$ kubectl rollout status deployment/broken-image -n troubleshooting-lab --timeout=180s
+Waiting for deployment "broken-image" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "broken-image" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "broken-image" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "broken-image" rollout to finish: 0 of 1 updated replicas are available...
+deployment "broken-image" successfully rolled out
+$ kubectl apply -f /Users/dibyochakraborty/devsecops-python/troubleshooting/broken-service.yaml
+service/broken-service created
+$ kubectl get endpointslice -n troubleshooting-lab -l kubernetes.io/service-name=broken-service -o json
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "addressType": "IPv4",
+            "apiVersion": "discovery.k8s.io/v1",
+            "endpoints": null,
+            "kind": "EndpointSlice",
+            "metadata": {
+                "annotations": {
+                    "endpoints.kubernetes.io/last-change-trigger-time": "2026-10-16T12:40:44Z"
+                },
+                "creationTimestamp": "2026-10-16T12:40:44Z",
+                "generateName": "broken-service-",
+                "generation": 1,
+                "labels": {
+                    "endpointslice.kubernetes.io/managed-by": "endpointslice-controller.k8s.io",
+                    "kubernetes.io/service-name": "broken-service"
+                },
+                "name": "broken-service-khx87",
+                "namespace": "troubleshooting-lab",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Service",
+                        "name": "broken-service",
+                        "uid": "ad9d8cf9-43ea-4762-a79c-82e360f9d9dc"
+                    }
+                ],
+                "resourceVersion": "3323",
+                "uid": "9cf16b0c-b58f-4d6d-b5d8-38075457ebdc"
+            },
+            "ports": null
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}
+$ kubectl get pods,services,endpointslices -n troubleshooting-lab
+NAME                                READY   STATUS    RESTARTS   AGE
+pod/broken-image-85d45f4784-gvzwp   1/1     Running   0          23s
+
+NAME                     TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/broken-service   ClusterIP   172.20.162.153   <none>        8080/TCP   2s
+
+NAME                                                  ADDRESSTYPE   PORTS     ENDPOINTS   AGE
+endpointslice.discovery.k8s.io/broken-service-khx87   IPv4          <unset>   <unset>     2s
+$ kubectl delete namespace troubleshooting-lab --wait=false
+namespace "troubleshooting-lab" deleted
+Isolated lab namespace deletion requested
+Traceback (most recent call last):
+  File "/Users/dibyochakraborty/devsecops-python/scripts/troubleshoot.py", line 82, in <module>
+    main()
+    ~~~~^^
+  File "/Users/dibyochakraborty/devsecops-python/scripts/troubleshoot.py", line 64, in main
+    assert not endpoint_addresses(), "Broken selector unexpectedly matched a pod"
+               ~~~~~~~~~~~~~~~~~~^^
+  File "/Users/dibyochakraborty/devsecops-python/scripts/troubleshoot.py", line 45, in endpoint_addresses
+    return [address for item in result["items"] for endpoint in item.get("endpoints", [])
+                                                                ~~~~~~~~^^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not iterable

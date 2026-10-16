@@ -123,4 +123,4 @@ The deliberately broken manifests in [troubleshooting](troubleshooting/) demonst
 
 This is an internal classroom demonstration, not a public customer service. It has no authentication, tenant isolation, email delivery, backups or HA database. Use synthetic data and local port forwards. PostgreSQL in Kubernetes is suitable for this exercise; a managed database and access controls would be required before public deployment.
 
-See [demo/README.md](demo/README.md) for the evidence index, slide deck, walkthrough and the exact distinction between completed verification and remaining requirements. Reference history is retained, and original project commits describe the meaningful helpdesk changes.
+See [demo/README.md](demo/README.md) for the evidence index, slide deck, walkthrough and verified results, teardown audit and documented limitations. Reference history is retained, and original project commits describe the meaningful helpdesk changes.

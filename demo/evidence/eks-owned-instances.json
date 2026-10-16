@@ -1,0 +1,34 @@
+[
+    {
+        "Id": "i-09467951f3138150d",
+        "State": "terminated",
+        "Type": "t3.medium",
+        "SubnetId": null,
+        "Volumes": []
+    },
+    {
+        "Id": "i-07b15c6c96066aa3b",
+        "State": "running",
+        "Type": "t3.medium",
+        "SubnetId": "subnet-06e7b32777c0692ee",
+        "Volumes": [
+            "vol-01686be71aee27182"
+        ]
+    },
+    {
+        "Id": "i-045206870e3d64ad6",
+        "State": "terminated",
+        "Type": "t3.medium",
+        "SubnetId": null,
+        "Volumes": []
+    },
+    {
+        "Id": "i-0510eddc1cdb0a09f",
+        "State": "running",
+        "Type": "t3.medium",
+        "SubnetId": "subnet-027f663e820bba3e9",
+        "Volumes": [
+            "vol-02188d2800f6afdc5"
+        ]
+    }
+]

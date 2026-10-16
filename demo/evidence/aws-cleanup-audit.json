@@ -1,0 +1,54 @@
+{
+  "checked_at_utc": "2026-10-16T13:12:28.086406+00:00",
+  "region": "ap-south-1",
+  "cluster": "resolvedesk-eks",
+  "vpc_id": "vpc-0e09db5a98e792e76",
+  "checks": {
+    "all_owned_instances_terminated": true,
+    "all_recorded_ebs_volumes_deleted": true,
+    "no_project_tagged_ebs_volumes": true,
+    "eks_cluster_deleted": true,
+    "vpc_deleted": true,
+    "no_vpc_network_interfaces": true,
+    "no_project_elastic_ips": true,
+    "no_active_vpc_nat_gateways": true,
+    "no_cluster_autoscaling_groups": true,
+    "terraform_state_empty": true,
+    "owned_kms_key_scheduled_for_deletion": true
+  },
+  "instances": [
+    {
+      "id": "i-09467951f3138150d",
+      "state": "terminated"
+    },
+    {
+      "id": "i-07b15c6c96066aa3b",
+      "state": "terminated"
+    },
+    {
+      "id": "i-045206870e3d64ad6",
+      "state": "terminated"
+    },
+    {
+      "id": "i-0510eddc1cdb0a09f",
+      "state": "terminated"
+    }
+  ],
+  "volumes": {
+    "vol-0d513e74b738b725f": {
+      "error": "aws: [ERROR]: An error occurred (InvalidVolume.NotFound) when calling the DescribeVolumes operation: The volume 'vol-0d513e74b738b725f' does not exist."
+    },
+    "vol-0d2b82f87b684b0bd": {
+      "error": "aws: [ERROR]: An error occurred (InvalidVolume.NotFound) when calling the DescribeVolumes operation: The volume 'vol-0d2b82f87b684b0bd' does not exist."
+    },
+    "vol-01686be71aee27182": {
+      "error": "aws: [ERROR]: An error occurred (InvalidVolume.NotFound) when calling the DescribeVolumes operation: The volume 'vol-01686be71aee27182' does not exist."
+    },
+    "vol-02188d2800f6afdc5": {
+      "error": "aws: [ERROR]: An error occurred (InvalidVolume.NotFound) when calling the DescribeVolumes operation: The volume 'vol-02188d2800f6afdc5' does not exist."
+    }
+  },
+  "kms_key_state": "PendingDeletion",
+  "kms_deletion_date": "2026-11-15T18:41:33.463000+05:30",
+  "scope": "Only resources created for this shared ResolveDesk and CampusDesk capstone; unrelated account resources were not modified."
+}

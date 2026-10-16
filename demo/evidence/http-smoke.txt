@@ -1,0 +1,2 @@
+PASS: HTTP CRUD, filters, validation, statistics and metrics; synthetic ticket retained for restart verification
+PASS: ticket survived service restart; synthetic ticket removed

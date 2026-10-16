@@ -1,0 +1,30 @@
+[
+  {
+    "health": "up",
+    "scrapeUrl": "http://10.20.101.249:8000/metrics",
+    "lastError": "",
+    "labels": {
+      "container": "backend",
+      "endpoint": "http",
+      "instance": "10.20.101.249:8000",
+      "job": "resolvedesk-backend",
+      "namespace": "resolvedesk",
+      "pod": "resolvedesk-backend-75f8b8b99f-qpzp9",
+      "service": "resolvedesk-backend"
+    }
+  },
+  {
+    "health": "up",
+    "scrapeUrl": "http://10.20.102.109:8000/metrics",
+    "lastError": "",
+    "labels": {
+      "container": "backend",
+      "endpoint": "http",
+      "instance": "10.20.102.109:8000",
+      "job": "resolvedesk-backend",
+      "namespace": "resolvedesk",
+      "pod": "resolvedesk-backend-75f8b8b99f-l2jph",
+      "service": "resolvedesk-backend"
+    }
+  }
+]

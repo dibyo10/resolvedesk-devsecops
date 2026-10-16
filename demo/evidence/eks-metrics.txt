@@ -1,0 +1,167 @@
+$ kubectl exec -n resolvedesk deployment/resolvedesk-backend -- python -c import urllib.request; print(urllib.request.urlopen("http://127.0.0.1:8000/metrics").read().decode())
+# HELP python_gc_objects_collected_total Objects collected during gc
+# TYPE python_gc_objects_collected_total counter
+python_gc_objects_collected_total{generation="0"} 450.0
+python_gc_objects_collected_total{generation="1"} 71.0
+python_gc_objects_collected_total{generation="2"} 0.0
+# HELP python_gc_objects_uncollectable_total Uncollectable objects found during GC
+# TYPE python_gc_objects_uncollectable_total counter
+python_gc_objects_uncollectable_total{generation="0"} 0.0
+python_gc_objects_uncollectable_total{generation="1"} 0.0
+python_gc_objects_uncollectable_total{generation="2"} 0.0
+# HELP python_gc_collections_total Number of times this generation was collected
+# TYPE python_gc_collections_total counter
+python_gc_collections_total{generation="0"} 217.0
+python_gc_collections_total{generation="1"} 19.0
+python_gc_collections_total{generation="2"} 1.0
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="3",minor="12",patchlevel="15",version="3.12.15"} 1.0
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 9.828352e+07
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 8.5409792e+07
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.792154488e+09
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 4.09
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 14.0
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 65536.0
+# HELP http_requests_total Total number of requests by method, status and handler.
+# TYPE http_requests_total counter
+http_requests_total{handler="/ready",method="GET",status="2xx"} 53.0
+http_requests_total{handler="/health",method="GET",status="2xx"} 17.0
+http_requests_total{handler="/api/tickets",method="GET",status="2xx"} 72.0
+http_requests_total{handler="/api/tickets",method="POST",status="2xx"} 4.0
+http_requests_total{handler="/api/tickets/stats",method="GET",status="2xx"} 67.0
+http_requests_total{handler="/metrics",method="GET",status="2xx"} 15.0
+# HELP http_requests_created Total number of requests by method, status and handler.
+# TYPE http_requests_created gauge
+http_requests_created{handler="/ready",method="GET",status="2xx"} 1.7921544953979924e+09
+http_requests_created{handler="/health",method="GET",status="2xx"} 1.7921545081269767e+09
+http_requests_created{handler="/api/tickets",method="GET",status="2xx"} 1.792154511591792e+09
+http_requests_created{handler="/api/tickets",method="POST",status="2xx"} 1.7921545303784087e+09
+http_requests_created{handler="/api/tickets/stats",method="GET",status="2xx"} 1.7921545329955063e+09
+http_requests_created{handler="/metrics",method="GET",status="2xx"} 1.7921545461889303e+09
+# HELP http_request_size_bytes Content length of incoming requests by handler. Only value of header is respected. Otherwise ignored. No percentile calculated. 
+# TYPE http_request_size_bytes summary
+http_request_size_bytes_count{handler="/ready"} 53.0
+http_request_size_bytes_sum{handler="/ready"} 0.0
+http_request_size_bytes_count{handler="/health"} 17.0
+http_request_size_bytes_sum{handler="/health"} 0.0
+http_request_size_bytes_count{handler="/api/tickets"} 76.0
+http_request_size_bytes_sum{handler="/api/tickets"} 914.0
+http_request_size_bytes_count{handler="/api/tickets/stats"} 67.0
+http_request_size_bytes_sum{handler="/api/tickets/stats"} 0.0
+http_request_size_bytes_count{handler="/metrics"} 15.0
+http_request_size_bytes_sum{handler="/metrics"} 0.0
+# HELP http_request_size_bytes_created Content length of incoming requests by handler. Only value of header is respected. Otherwise ignored. No percentile calculated. 
+# TYPE http_request_size_bytes_created gauge
+http_request_size_bytes_created{handler="/ready"} 1.7921544953980265e+09
+http_request_size_bytes_created{handler="/health"} 1.7921545081270113e+09
+http_request_size_bytes_created{handler="/api/tickets"} 1.7921545115918176e+09
+http_request_size_bytes_created{handler="/api/tickets/stats"} 1.792154532995533e+09
+http_request_size_bytes_created{handler="/metrics"} 1.792154546188955e+09
+# HELP http_response_size_bytes Content length of outgoing responses by handler. Only value of header is respected. Otherwise ignored. No percentile calculated. 
+# TYPE http_response_size_bytes summary
+http_response_size_bytes_count{handler="/ready"} 53.0
+http_response_size_bytes_sum{handler="/ready"} 954.0
+http_response_size_bytes_count{handler="/health"} 17.0
+http_response_size_bytes_sum{handler="/health"} 255.0
+http_response_size_bytes_count{handler="/api/tickets"} 76.0
+http_response_size_bytes_sum{handler="/api/tickets"} 130568.0
+http_response_size_bytes_count{handler="/api/tickets/stats"} 67.0
+http_response_size_bytes_sum{handler="/api/tickets/stats"} 3953.0
+http_response_size_bytes_count{handler="/metrics"} 15.0
+http_response_size_bytes_sum{handler="/metrics"} 175919.0
+# HELP http_response_size_bytes_created Content length of outgoing responses by handler. Only value of header is respected. Otherwise ignored. No percentile calculated. 
+# TYPE http_response_size_bytes_created gauge
+http_response_size_bytes_created{handler="/ready"} 1.7921544953980675e+09
+http_response_size_bytes_created{handler="/health"} 1.7921545081270478e+09
+http_response_size_bytes_created{handler="/api/tickets"} 1.7921545115918477e+09
+http_response_size_bytes_created{handler="/api/tickets/stats"} 1.7921545329955633e+09
+http_response_size_bytes_created{handler="/metrics"} 1.7921545461889834e+09
+# HELP http_request_duration_highr_seconds Latency with many buckets but no API specific labels. Made for more accurate percentile calculations. 
+# TYPE http_request_duration_highr_seconds histogram
+http_request_duration_highr_seconds_bucket{le="0.01"} 210.0
+http_request_duration_highr_seconds_bucket{le="0.025"} 225.0
+http_request_duration_highr_seconds_bucket{le="0.05"} 227.0
+http_request_duration_highr_seconds_bucket{le="0.075"} 227.0
+http_request_duration_highr_seconds_bucket{le="0.1"} 228.0
+http_request_duration_highr_seconds_bucket{le="0.25"} 228.0
+http_request_duration_highr_seconds_bucket{le="0.5"} 228.0
+http_request_duration_highr_seconds_bucket{le="0.75"} 228.0
+http_request_duration_highr_seconds_bucket{le="1.0"} 228.0
+http_request_duration_highr_seconds_bucket{le="1.5"} 228.0
+http_request_duration_highr_seconds_bucket{le="2.0"} 228.0
+http_request_duration_highr_seconds_bucket{le="2.5"} 228.0
+http_request_duration_highr_seconds_bucket{le="3.0"} 228.0
+http_request_duration_highr_seconds_bucket{le="3.5"} 228.0
+http_request_duration_highr_seconds_bucket{le="4.0"} 228.0
+http_request_duration_highr_seconds_bucket{le="4.5"} 228.0
+http_request_duration_highr_seconds_bucket{le="5.0"} 228.0
+http_request_duration_highr_seconds_bucket{le="7.5"} 228.0
+http_request_duration_highr_seconds_bucket{le="10.0"} 228.0
+http_request_duration_highr_seconds_bucket{le="30.0"} 228.0
+http_request_duration_highr_seconds_bucket{le="60.0"} 228.0
+http_request_duration_highr_seconds_bucket{le="+Inf"} 228.0
+http_request_duration_highr_seconds_count 228.0
+http_request_duration_highr_seconds_sum 1.4136050470004307
+# HELP http_request_duration_highr_seconds_created Latency with many buckets but no API specific labels. Made for more accurate percentile calculations. 
+# TYPE http_request_duration_highr_seconds_created gauge
+http_request_duration_highr_seconds_created 1.7921544930551496e+09
+# HELP http_request_duration_seconds Latency with only few buckets by handler. Made to be only used if aggregation by handler is important. 
+# TYPE http_request_duration_seconds histogram
+http_request_duration_seconds_bucket{handler="/ready",le="0.1",method="GET"} 53.0
+http_request_duration_seconds_bucket{handler="/ready",le="0.5",method="GET"} 53.0
+http_request_duration_seconds_bucket{handler="/ready",le="1.0",method="GET"} 53.0
+http_request_duration_seconds_bucket{handler="/ready",le="+Inf",method="GET"} 53.0
+http_request_duration_seconds_count{handler="/ready",method="GET"} 53.0
+http_request_duration_seconds_sum{handler="/ready",method="GET"} 0.3802153180000971
+http_request_duration_seconds_bucket{handler="/health",le="0.1",method="GET"} 17.0
+http_request_duration_seconds_bucket{handler="/health",le="0.5",method="GET"} 17.0
+http_request_duration_seconds_bucket{handler="/health",le="1.0",method="GET"} 17.0
+http_request_duration_seconds_bucket{handler="/health",le="+Inf",method="GET"} 17.0
+http_request_duration_seconds_count{handler="/health",method="GET"} 17.0
+http_request_duration_seconds_sum{handler="/health",method="GET"} 0.0229873299999781
+http_request_duration_seconds_bucket{handler="/api/tickets",le="0.1",method="GET"} 72.0
+http_request_duration_seconds_bucket{handler="/api/tickets",le="0.5",method="GET"} 72.0
+http_request_duration_seconds_bucket{handler="/api/tickets",le="1.0",method="GET"} 72.0
+http_request_duration_seconds_bucket{handler="/api/tickets",le="+Inf",method="GET"} 72.0
+http_request_duration_seconds_count{handler="/api/tickets",method="GET"} 72.0
+http_request_duration_seconds_sum{handler="/api/tickets",method="GET"} 0.4640159640003958
+http_request_duration_seconds_bucket{handler="/api/tickets",le="0.1",method="POST"} 4.0
+http_request_duration_seconds_bucket{handler="/api/tickets",le="0.5",method="POST"} 4.0
+http_request_duration_seconds_bucket{handler="/api/tickets",le="1.0",method="POST"} 4.0
+http_request_duration_seconds_bucket{handler="/api/tickets",le="+Inf",method="POST"} 4.0
+http_request_duration_seconds_count{handler="/api/tickets",method="POST"} 4.0
+http_request_duration_seconds_sum{handler="/api/tickets",method="POST"} 0.03809970300000032
+http_request_duration_seconds_bucket{handler="/api/tickets/stats",le="0.1",method="GET"} 67.0
+http_request_duration_seconds_bucket{handler="/api/tickets/stats",le="0.5",method="GET"} 67.0
+http_request_duration_seconds_bucket{handler="/api/tickets/stats",le="1.0",method="GET"} 67.0
+http_request_duration_seconds_bucket{handler="/api/tickets/stats",le="+Inf",method="GET"} 67.0
+http_request_duration_seconds_count{handler="/api/tickets/stats",method="GET"} 67.0
+http_request_duration_seconds_sum{handler="/api/tickets/stats",method="GET"} 0.4557792509999956
+http_request_duration_seconds_bucket{handler="/metrics",le="0.1",method="GET"} 15.0
+http_request_duration_seconds_bucket{handler="/metrics",le="0.5",method="GET"} 15.0
+http_request_duration_seconds_bucket{handler="/metrics",le="1.0",method="GET"} 15.0
+http_request_duration_seconds_bucket{handler="/metrics",le="+Inf",method="GET"} 15.0
+http_request_duration_seconds_count{handler="/metrics",method="GET"} 15.0
+http_request_duration_seconds_sum{handler="/metrics",method="GET"} 0.05250748099996372
+# HELP http_request_duration_seconds_created Latency with only few buckets by handler. Made to be only used if aggregation by handler is important. 
+# TYPE http_request_duration_seconds_created gauge
+http_request_duration_seconds_created{handler="/ready",method="GET"} 1.792154495398113e+09
+http_request_duration_seconds_created{handler="/health",method="GET"} 1.7921545081270885e+09
+http_request_duration_seconds_created{handler="/api/tickets",method="GET"} 1.7921545115918837e+09
+http_request_duration_seconds_created{handler="/api/tickets",method="POST"} 1.7921545303784773e+09
+http_request_duration_seconds_created{handler="/api/tickets/stats",method="GET"} 1.7921545329955993e+09
+http_request_duration_seconds_created{handler="/metrics",method="GET"} 1.7921545461890154e+09
+

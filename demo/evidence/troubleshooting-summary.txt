@@ -1,0 +1,16 @@
+$ kubectl apply -f /Users/dibyochakraborty/devsecops-python/troubleshooting/broken-image.yaml
+Observed image pull failure for a nonexistent tag
+  Warning  Failed     5s    kubelet            spec.containers{backend}: Error: ErrImagePull
+  Warning  Failed     4s    kubelet            spec.containers{backend}: Error: ImagePullBackOff
+$ kubectl set image deployment/broken-image backend=ghcr.io/dibyo10/resolvedesk-backend:ffaa47fee9ffcf2f9e21cd8cd181376ed5d3cf17 -n troubleshooting-lab
+deployment "broken-image" successfully rolled out
+$ kubectl apply -f /Users/dibyochakraborty/devsecops-python/troubleshooting/broken-service.yaml
+Observed zero ready endpoints for the incorrect selector
+$ kubectl patch service broken-service -n troubleshooting-lab --type=merge -p {"spec": {"selector": {"app": "broken-image"}}}
+Corrected selector has ready service endpoints
+$ kubectl exec -n troubleshooting-lab deployment/broken-image -- python -c import urllib.request; print(urllib.request.urlopen('http://broken-service:8080/health').read().decode())
+{"status":"UP"}
+pod/broken-image-85d45f4784-jm8kh   1/1     Running   0          31s
+Both failures repaired successfully
+pod/broken-image-85d45f4784-jm8kh   1/1     Running   0          31s
+namespace "troubleshooting-lab" deleted

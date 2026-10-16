@@ -1,0 +1,324 @@
+$ kubectl get pv -o json
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "PersistentVolume",
+            "metadata": {
+                "annotations": {
+                    "pv.kubernetes.io/provisioned-by": "ebs.csi.aws.com",
+                    "volume.kubernetes.io/provisioner-deletion-secret-name": "",
+                    "volume.kubernetes.io/provisioner-deletion-secret-namespace": ""
+                },
+                "creationTimestamp": "2026-10-16T12:40:58Z",
+                "finalizers": [
+                    "kubernetes.io/pv-protection",
+                    "external-attacher/ebs-csi-aws-com"
+                ],
+                "name": "pvc-de1e6b90-eb09-4540-b377-80581885e68c",
+                "resourceVersion": "3550",
+                "uid": "d99cabfa-ceca-413e-8cae-b4d6a101c59a"
+            },
+            "spec": {
+                "accessModes": [
+                    "ReadWriteOnce"
+                ],
+                "capacity": {
+                    "storage": "5Gi"
+                },
+                "claimRef": {
+                    "apiVersion": "v1",
+                    "kind": "PersistentVolumeClaim",
+                    "name": "data-resolvedesk-postgres-0",
+                    "namespace": "resolvedesk",
+                    "resourceVersion": "3112",
+                    "uid": "de1e6b90-eb09-4540-b377-80581885e68c"
+                },
+                "csi": {
+                    "driver": "ebs.csi.aws.com",
+                    "fsType": "ext4",
+                    "volumeAttributes": {
+                        "storage.kubernetes.io/csiProvisionerIdentity": "1792154449305-9042-ebs.csi.aws.com"
+                    },
+                    "volumeHandle": "vol-0d513e74b738b725f"
+                },
+                "nodeAffinity": {
+                    "required": {
+                        "nodeSelectorTerms": [
+                            {
+                                "matchExpressions": [
+                                    {
+                                        "key": "topology.kubernetes.io/zone",
+                                        "operator": "In",
+                                        "values": [
+                                            "ap-south-1b"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "persistentVolumeReclaimPolicy": "Retain",
+                "storageClassName": "gp3",
+                "volumeMode": "Filesystem"
+            },
+            "status": {
+                "lastPhaseTransitionTime": "2026-10-16T12:40:58Z",
+                "phase": "Bound"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "PersistentVolume",
+            "metadata": {
+                "annotations": {
+                    "pv.kubernetes.io/provisioned-by": "ebs.csi.aws.com",
+                    "volume.kubernetes.io/provisioner-deletion-secret-name": "",
+                    "volume.kubernetes.io/provisioner-deletion-secret-namespace": ""
+                },
+                "creationTimestamp": "2026-10-16T12:41:52Z",
+                "finalizers": [
+                    "kubernetes.io/pv-protection",
+                    "external-attacher/ebs-csi-aws-com"
+                ],
+                "name": "pvc-e8bac8b0-6b82-49ed-89e8-0c5a661e1186",
+                "resourceVersion": "4075",
+                "uid": "ac01b6ef-8ab5-4431-8a9a-b6c225ba7816"
+            },
+            "spec": {
+                "accessModes": [
+                    "ReadWriteOnce"
+                ],
+                "capacity": {
+                    "storage": "5Gi"
+                },
+                "claimRef": {
+                    "apiVersion": "v1",
+                    "kind": "PersistentVolumeClaim",
+                    "name": "data-resolvedesk-postgres-0",
+                    "namespace": "campusdesk",
+                    "resourceVersion": "4008",
+                    "uid": "e8bac8b0-6b82-49ed-89e8-0c5a661e1186"
+                },
+                "csi": {
+                    "driver": "ebs.csi.aws.com",
+                    "fsType": "ext4",
+                    "volumeAttributes": {
+                        "storage.kubernetes.io/csiProvisionerIdentity": "1792154449305-9042-ebs.csi.aws.com"
+                    },
+                    "volumeHandle": "vol-0d2b82f87b684b0bd"
+                },
+                "nodeAffinity": {
+                    "required": {
+                        "nodeSelectorTerms": [
+                            {
+                                "matchExpressions": [
+                                    {
+                                        "key": "topology.kubernetes.io/zone",
+                                        "operator": "In",
+                                        "values": [
+                                            "ap-south-1a"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "persistentVolumeReclaimPolicy": "Retain",
+                "storageClassName": "gp3",
+                "volumeMode": "Filesystem"
+            },
+            "status": {
+                "lastPhaseTransitionTime": "2026-10-16T12:41:52Z",
+                "phase": "Bound"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}
+$ kubectl delete application resolvedesk -n argocd --ignore-not-found
+application.argoproj.io "resolvedesk" deleted from argocd namespace
+$ kubectl delete application campusdesk -n argocd --ignore-not-found
+application.argoproj.io "campusdesk" deleted from argocd namespace
+$ kubectl patch pv pvc-de1e6b90-eb09-4540-b377-80581885e68c --type=merge -p {"spec":{"persistentVolumeReclaimPolicy":"Delete"}}
+persistentvolume/pvc-de1e6b90-eb09-4540-b377-80581885e68c patched
+$ kubectl patch pv pvc-e8bac8b0-6b82-49ed-89e8-0c5a661e1186 --type=merge -p {"spec":{"persistentVolumeReclaimPolicy":"Delete"}}
+persistentvolume/pvc-e8bac8b0-6b82-49ed-89e8-0c5a661e1186 patched
+$ helm uninstall resolvedesk -n resolvedesk --wait --timeout 5m
+1 resource(s) were not deleted because they are not owned by this release:
+[Job] resolvedesk-migrate-d703e4d20dde
+
+release "resolvedesk" uninstalled
+level=WARN msg="skipping delete of resource not owned by this release" kind=Job name=resolvedesk-migrate-d703e4d20dde namespace=resolvedesk release=resolvedesk
+$ helm uninstall resolvedesk -n campusdesk --wait --timeout 5m
+1 resource(s) were not deleted because they are not owned by this release:
+[Job] resolvedesk-migrate-48f8db3311dd
+
+release "resolvedesk" uninstalled
+level=WARN msg="skipping delete of resource not owned by this release" kind=Job name=resolvedesk-migrate-48f8db3311dd namespace=campusdesk release=resolvedesk
+$ kubectl delete pvc data-resolvedesk-postgres-0 -n resolvedesk --wait=true --timeout=5m
+persistentvolumeclaim "data-resolvedesk-postgres-0" deleted from resolvedesk namespace
+$ kubectl delete pvc data-resolvedesk-postgres-0 -n campusdesk --wait=true --timeout=5m
+persistentvolumeclaim "data-resolvedesk-postgres-0" deleted from campusdesk namespace
+$ aws ec2 describe-volumes --volume-ids vol-0d513e74b738b725f --region ap-south-1
+{
+    "Volumes": [
+        {
+            "AvailabilityZoneId": "aps1-az3",
+            "Iops": 3000,
+            "Tags": [
+                {
+                    "Key": "kubernetes.io/created-for/pv/name",
+                    "Value": "pvc-de1e6b90-eb09-4540-b377-80581885e68c"
+                },
+                {
+                    "Key": "KubernetesCluster",
+                    "Value": "resolvedesk-eks"
+                },
+                {
+                    "Key": "ebs.csi.aws.com/cluster",
+                    "Value": "true"
+                },
+                {
+                    "Key": "kubernetes.io/cluster/resolvedesk-eks",
+                    "Value": "owned"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "resolvedesk-eks-dynamic-pvc-de1e6b90-eb09-4540-b377-80581885e68c"
+                },
+                {
+                    "Key": "CSIVolumeName",
+                    "Value": "pvc-de1e6b90-eb09-4540-b377-80581885e68c"
+                },
+                {
+                    "Key": "ebs.csi.aws.com/cluster-name",
+                    "Value": "resolvedesk-eks"
+                },
+                {
+                    "Key": "kubernetes.io/created-for/pvc/namespace",
+                    "Value": "resolvedesk"
+                },
+                {
+                    "Key": "kubernetes.io/created-for/pvc/name",
+                    "Value": "data-resolvedesk-postgres-0"
+                }
+            ],
+            "VolumeType": "gp3",
+            "MultiAttachEnabled": false,
+            "Throughput": 125,
+            "Operator": {
+                "Managed": false,
+                "HiddenByDefault": false
+            },
+            "VolumeId": "vol-0d513e74b738b725f",
+            "Size": 5,
+            "SnapshotId": "",
+            "AvailabilityZone": "ap-south-1b",
+            "State": "in-use",
+            "CreateTime": "2026-10-16T12:40:56.761000+00:00",
+            "Attachments": [
+                {
+                    "DeleteOnTermination": false,
+                    "EbsCardIndex": 0,
+                    "VolumeId": "vol-0d513e74b738b725f",
+                    "InstanceId": "i-0510eddc1cdb0a09f",
+                    "Device": "/dev/xvdaa",
+                    "State": "attached",
+                    "AttachTime": "2026-10-16T12:41:00+00:00"
+                }
+            ],
+            "Encrypted": true,
+            "KmsKeyId": "arn:aws:kms:ap-south-1:093529868648:key/b5666adb-cf2c-46f4-b603-2b549fc31cc1"
+        }
+    ]
+}
+$ aws ec2 describe-volumes --volume-ids vol-0d513e74b738b725f --region ap-south-1
+{
+    "Volumes": [
+        {
+            "AvailabilityZoneId": "aps1-az3",
+            "Iops": 3000,
+            "Tags": [
+                {
+                    "Key": "kubernetes.io/created-for/pv/name",
+                    "Value": "pvc-de1e6b90-eb09-4540-b377-80581885e68c"
+                },
+                {
+                    "Key": "KubernetesCluster",
+                    "Value": "resolvedesk-eks"
+                },
+                {
+                    "Key": "ebs.csi.aws.com/cluster",
+                    "Value": "true"
+                },
+                {
+                    "Key": "kubernetes.io/cluster/resolvedesk-eks",
+                    "Value": "owned"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "resolvedesk-eks-dynamic-pvc-de1e6b90-eb09-4540-b377-80581885e68c"
+                },
+                {
+                    "Key": "CSIVolumeName",
+                    "Value": "pvc-de1e6b90-eb09-4540-b377-80581885e68c"
+                },
+                {
+                    "Key": "ebs.csi.aws.com/cluster-name",
+                    "Value": "resolvedesk-eks"
+                },
+                {
+                    "Key": "kubernetes.io/created-for/pvc/namespace",
+                    "Value": "resolvedesk"
+                },
+                {
+                    "Key": "kubernetes.io/created-for/pvc/name",
+                    "Value": "data-resolvedesk-postgres-0"
+                }
+            ],
+            "VolumeType": "gp3",
+            "MultiAttachEnabled": false,
+            "Throughput": 125,
+            "Operator": {
+                "Managed": false,
+                "HiddenByDefault": false
+            },
+            "VolumeId": "vol-0d513e74b738b725f",
+            "Size": 5,
+            "SnapshotId": "",
+            "AvailabilityZone": "ap-south-1b",
+            "State": "available",
+            "CreateTime": "2026-10-16T12:40:56.761000+00:00",
+            "Attachments": [],
+            "Encrypted": true,
+            "KmsKeyId": "arn:aws:kms:ap-south-1:093529868648:key/b5666adb-cf2c-46f4-b603-2b549fc31cc1"
+        }
+    ]
+}
+$ aws ec2 describe-volumes --volume-ids vol-0d513e74b738b725f --region ap-south-1
+
+aws: [ERROR]: An error occurred (InvalidVolume.NotFound) when calling the DescribeVolumes operation: The volume 'vol-0d513e74b738b725f' does not exist.
+$ aws ec2 describe-volumes --volume-ids vol-0d2b82f87b684b0bd --region ap-south-1
+
+aws: [ERROR]: An error occurred (InvalidVolume.NotFound) when calling the DescribeVolumes operation: The volume 'vol-0d2b82f87b684b0bd' does not exist.
+$ helm uninstall kube-prometheus-stack -n monitoring --wait --timeout 5m
+release "kube-prometheus-stack" uninstalled
+$ helm uninstall argocd -n argocd --wait --timeout 5m
+These resources were kept due to the resource policy:
+[CustomResourceDefinition] applications.argoproj.io
+[CustomResourceDefinition] applicationsets.argoproj.io
+[CustomResourceDefinition] appprojects.argoproj.io
+
+release "argocd" uninstalled
+$ helm uninstall ingress-nginx -n ingress-nginx --wait --timeout 5m
+release "ingress-nginx" uninstalled
+$ helm uninstall metrics-server -n kube-system --wait --timeout 5m
+release "metrics-server" uninstalled
+All application PVC-backed EBS volumes verified deleted. Supporting Helm releases removed.

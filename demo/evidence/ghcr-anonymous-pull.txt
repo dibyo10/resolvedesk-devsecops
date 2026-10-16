@@ -1,0 +1,32 @@
+ffaa47fee9ffcf2f9e21cd8cd181376ed5d3cf17: Pulling from dibyo10/resolvedesk-backend
+867907d862cb: Pulling fs layer
+e369e4e2b1d8: Pulling fs layer
+b33ff8649416: Pulling fs layer
+9910353684f9: Pulling fs layer
+6d9afa9d2c57: Pulling fs layer
+8244f13271a2: Pulling fs layer
+9910353684f9: Download complete
+6d9afa9d2c57: Download complete
+8244f13271a2: Download complete
+e369e4e2b1d8: Download complete
+b33ff8649416: Download complete
+e369e4e2b1d8: Pull complete
+b33ff8649416: Pull complete
+867907d862cb: Download complete
+9910353684f9: Pull complete
+6d9afa9d2c57: Pull complete
+8244f13271a2: Pull complete
+867907d862cb: Pull complete
+Digest: sha256:0519aa37b8a2108ede3c435c6d6b750212d128c7c649207466fdc8545120e822
+Status: Downloaded newer image for ghcr.io/dibyo10/resolvedesk-backend:ffaa47fee9ffcf2f9e21cd8cd181376ed5d3cf17
+ghcr.io/dibyo10/resolvedesk-backend:ffaa47fee9ffcf2f9e21cd8cd181376ed5d3cf17
+ffaa47fee9ffcf2f9e21cd8cd181376ed5d3cf17: Pulling from dibyo10/resolvedesk-frontend
+ea9ee7453221: Pulling fs layer
+cc3b58b9558d: Pulling fs layer
+cc3b58b9558d: Download complete
+cc3b58b9558d: Pull complete
+ea9ee7453221: Download complete
+ea9ee7453221: Pull complete
+Digest: sha256:b550e747217c7467d5a9ae7ad2c9ac09270dfcbc223b9240895050f7f42417ee
+Status: Downloaded newer image for ghcr.io/dibyo10/resolvedesk-frontend:ffaa47fee9ffcf2f9e21cd8cd181376ed5d3cf17
+ghcr.io/dibyo10/resolvedesk-frontend:ffaa47fee9ffcf2f9e21cd8cd181376ed5d3cf17

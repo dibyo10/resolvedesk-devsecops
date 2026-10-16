@@ -1,0 +1,3 @@
+$ kubectl get pvc -n resolvedesk
+NAME                          STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+data-resolvedesk-postgres-0   Bound    pvc-de1e6b90-eb09-4540-b377-80581885e68c   5Gi        RWO            gp3            <unset>                 5m21s

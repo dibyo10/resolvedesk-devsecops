@@ -1,0 +1,3 @@
+$ helm list -n resolvedesk
+NAME       	NAMESPACE  	REVISION	UPDATED                             	STATUS  	CHART            	APP VERSION
+resolvedesk	resolvedesk	1       	2026-10-16 18:10:31.729398 +0530 IST	deployed	resolvedesk-1.0.0	1.0.0      

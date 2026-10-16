@@ -1,0 +1,4 @@
+NAME                     IMAGE                        COMMAND                  SERVICE    CREATED              STATUS                        PORTS
+resolvedesk-backend-1    resolvedesk-backend:local    "sh -c 'alembic upgr…"   backend    18 seconds ago       Up 17 seconds (healthy)       127.0.0.1:8000->8000/tcp
+resolvedesk-frontend-1   resolvedesk-frontend:local   "nginx -g 'daemon of…"   frontend   18 seconds ago       Up 11 seconds (healthy)       127.0.0.1:3000->8080/tcp
+resolvedesk-postgres-1   postgres:16-alpine           "docker-entrypoint.s…"   postgres   About a minute ago   Up About a minute (healthy)   5432/tcp

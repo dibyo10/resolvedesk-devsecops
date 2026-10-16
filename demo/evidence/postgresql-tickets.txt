@@ -1,0 +1,8 @@
+ id |                  subject                  | priority |   status    
+----+-------------------------------------------+----------+-------------
+  1 | VPN access fails after laptop update      | URGENT   | IN_PROGRESS
+  2 | Restore access to the design workspace    | HIGH     | OPEN
+  3 | Invoice export missing the latest payment | MEDIUM   | OPEN
+  4 | Set up a new teammate’s account           | LOW      | RESOLVED
+(4 rows)
+

@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "checks": [
+    "create",
+    "edit status",
+    "search",
+    "delete",
+    "desktop",
+    "mobile overflow",
+    "no JavaScript errors"
+  ],
+  "data": "synthetic demonstration tickets"
+}

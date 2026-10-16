@@ -1,0 +1,3 @@
+$ kubectl get application resolvedesk -n argocd -o custom-columns=NAME:.metadata.name,SYNC:.status.sync.status,HEALTH:.status.health.status,OPERATION:.status.operationState.phase
+NAME          SYNC     HEALTH    OPERATION
+resolvedesk   Synced   Healthy   Succeeded

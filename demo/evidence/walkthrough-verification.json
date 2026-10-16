@@ -1,0 +1,29 @@
+{
+  "programs": [],
+  "stream_groups": [],
+  "streams": [
+    {
+      "codec_name": "h264",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "codec_name": "aac"
+    }
+  ],
+  "format": {
+    "duration": "670.365533",
+    "size": "14913130"
+  },
+  "review": {
+    "representative_frames_seconds": [
+      12,
+      450,
+      645
+    ],
+    "slides_first": true,
+    "synthetic_narration": "macOS Samantha",
+    "recorded_ci_run": "https://github.com/dibyo10/resolvedesk-devsecops/actions/runs/38902868534",
+    "monitoring_segment": "Fresh authenticated capture after Grafana restart; stale login segment excluded."
+  }
+}

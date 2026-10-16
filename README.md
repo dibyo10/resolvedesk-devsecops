@@ -34,7 +34,7 @@ docker compose up --build -d
 Open http://localhost:3000. API documentation is at http://localhost:8000/docs. Compose waits for PostgreSQL health, runs migrations, starts the backend and then starts the frontend. Both application images run as non-root users. Local database credentials are for this isolated demonstration only; the database port is not published.
 
 ```sh
-python3 scripts/smoke-api.py http://localhost:8000
+python3 scripts/smoke-api.py --base-url http://localhost:8000
 docker compose ps
 docker compose down
 ```

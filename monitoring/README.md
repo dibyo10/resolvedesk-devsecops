@@ -29,3 +29,5 @@ Run the port-forward commands in separate terminals. Read the generated Grafana 
 Generate traffic against `/api/tickets` repeatedly and allow two scrape intervals. The dashboard shows request rate, p95 latency, and server errors. A zero error rate is a valid result. Queries select `namespace="resolvedesk"`; update the selector when using another namespace. The dashboard expects the default kube-prometheus-stack datasource UID `prometheus`.
 
 Capture `/metrics`, an UP Prometheus target, and a populated Grafana dashboard as separate evidence. A chart installation or dashboard JSON alone does not prove live scraping. Grafana storage is ephemeral for this classroom demo; the dashboard source stays in Git.
+
+The shared classroom cluster disables Alertmanager and kube-state-metrics because the rubric requires HTTP metrics dashboards, not alert routing or Kubernetes-object inventory metrics. This preserves pod capacity for both applications and migration hooks on two small workers. Metrics Server still supplies HPA CPU measurements; node-exporter remains installed.

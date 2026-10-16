@@ -11,3 +11,5 @@
 - Database migrations are a single job per deployed image revision. Application replicas wait for the expected revision before serving traffic.
 - CI publishes immutable SHA-tagged images after tests, strict vulnerability scans and a temporary Kubernetes deployment. GitOps promotes a selected tested SHA through a separate values change.
 - All temporary AWS resources created for this exercise must be destroyed after both applications have been demonstrated and evidence collected.
+
+- AWS Elastic IP quota prevented the initial NAT design. The recovered temporary deployment uses public-subnet workers with automatic IPs, no public inbound node rules, and an operator-IP-restricted Kubernetes API. Existing AWS resources are untouched. Production private-node networking remains a separate decision.

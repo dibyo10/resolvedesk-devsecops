@@ -6,14 +6,14 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.8.1"
 
-  name                 = "${var.cluster_name}-vpc"
-  cidr                 = "10.20.0.0/16"
-  azs                  = slice(data.aws_availability_zones.available.names, 0, 2)
-  private_subnets      = ["10.20.1.0/24", "10.20.2.0/24"]
-  public_subnets       = ["10.20.101.0/24", "10.20.102.0/24"]
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
-  enable_dns_hostnames = true
+  name                    = "${var.cluster_name}-vpc"
+  cidr                    = "10.20.0.0/16"
+  azs                     = slice(data.aws_availability_zones.available.names, 0, 2)
+  private_subnets         = ["10.20.1.0/24", "10.20.2.0/24"]
+  public_subnets          = ["10.20.101.0/24", "10.20.102.0/24"]
+  enable_nat_gateway      = false
+  map_public_ip_on_launch = true
+  enable_dns_hostnames    = true
 
   public_subnet_tags = {
     "kubernetes.io/role/elb" = "1"
@@ -50,6 +50,7 @@ module "eks" {
     main = {
       instance_types = ["t3.medium"]
       ami_type       = "AL2023_x86_64_STANDARD"
+      subnet_ids     = module.vpc.public_subnets
       min_size       = 2
       max_size       = 4
       desired_size   = 2

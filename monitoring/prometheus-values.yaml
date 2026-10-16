@@ -15,3 +15,7 @@ prometheus:
         memory: 256Mi
       limits:
         memory: 1Gi
+alertmanager:
+  enabled: false
+kubeStateMetrics:
+  enabled: false

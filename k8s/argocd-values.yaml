@@ -21,7 +21,7 @@ repoServer:
       cpu: 50m
       memory: 128Mi
 applicationSet:
-  enabled: false
+  replicas: 0
 notifications:
   enabled: false
 dex:

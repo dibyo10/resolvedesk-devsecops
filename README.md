@@ -1,6 +1,6 @@
 # ResolveDesk
 
-ResolveDesk is a helpdesk workspace for recording, assigning and resolving support tickets. It is an original application built for the DevSecOps capstone, using the supplied TaskBoard repository as an infrastructure starting point. The original assignment is preserved in [docs/assignment](docs/assignment/).
+ResolveDesk is a helpdesk workspace for recording, assigning and resolving support tickets. It is an original application built for the DevSecOps capstone, using [the supplied TaskBoard repository](https://github.com/Nency-Ravaliya/devsecops-python) as an infrastructure starting point. The original assignment is preserved in [docs/assignment](docs/assignment/).
 
 ## Application
 
@@ -101,7 +101,7 @@ Application and scanner base images are digest pinned. Python dependencies and n
 
 ## AWS infrastructure
 
-See [terraform/README.md](terraform/README.md) for setup, plan, apply and destroy. Terraform provisions a VPC, two public and two private subnets, a NAT gateway, EKS, managed worker nodes, and EBS CSI permissions. The Kubernetes API is restricted to the operator's explicit IP range. The example uses ap-south-1.
+See [terraform/README.md](terraform/README.md) for setup, plan, apply and destroy. Terraform provisions a VPC, two public and two private subnets, EKS, managed worker nodes, and EBS CSI permissions. The temporary worker nodes use public subnets and automatically assigned public IPs because the account has exhausted its Elastic IP quota. Node security groups allow no public inbound traffic, and the Kubernetes API is restricted to the operator's explicit IP range. No NAT gateway or existing Elastic IP is used. The example uses ap-south-1.
 
 AWS infrastructure costs money while it exists. The capstone deployment is temporary; its final creation and teardown evidence is recorded in [demo](demo/). Terraform state, saved plans, credentials and real variable files must remain local.
 

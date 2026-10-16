@@ -5,7 +5,7 @@ Install the Prometheus Operator and Grafana before enabling the application's Se
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
-helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
+helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack --version 92.9.0 \
   --namespace monitoring --create-namespace \
   -f monitoring/prometheus-values.yaml -f monitoring/grafana-values.yaml \
   --wait --timeout 10m

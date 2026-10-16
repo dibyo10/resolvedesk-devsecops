@@ -34,7 +34,7 @@ For EKS, apply `k8s/storage-class.yaml`, install monitoring first, and use `valu
 
 ## GitOps
 
-Install ArgoCD using its official installation guide, then update `values-release.yaml` to the successfully published Git SHA for both images and push it. The example Application tracks the student's repository and uses development ingress settings; use production values for EKS after ingress and monitoring are ready.
+Install ArgoCD using its official installation guide, then update `values-release.yaml` to the successfully published Git SHA for both images and push it. The example Application tracks the student's repository and uses production values with the local demonstration hostname `resolvedesk.local`. Install the EKS StorageClass, ingress controller, Metrics Server and monitoring before synchronization.
 
 ```bash
 kubectl apply -f k8s/argocd-application.yaml

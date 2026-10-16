@@ -12,8 +12,11 @@ spec:
     helm:
       releaseName: resolvedesk
       valueFiles:
-        - values-dev.yaml
+        - values-prod.yaml
         - values-release.yaml
+      parameters:
+        - name: ingress.host
+          value: resolvedesk.local
   destination:
     server: https://kubernetes.default.svc
     namespace: resolvedesk

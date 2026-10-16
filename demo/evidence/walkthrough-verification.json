@@ -12,18 +12,49 @@
     }
   ],
   "format": {
-    "duration": "670.365533",
-    "size": "14913130"
+    "duration": "678.389705",
+    "size": "14338789"
   },
-  "review": {
-    "representative_frames_seconds": [
-      12,
-      450,
-      645
-    ],
-    "slides_first": true,
-    "synthetic_narration": "macOS Samantha",
-    "recorded_ci_run": "https://github.com/dibyo10/resolvedesk-devsecops/actions/runs/38902868534",
-    "monitoring_segment": "Fresh authenticated capture after Grafana restart; stale login segment excluded."
-  }
+  "narration": "macOS Samantha synthetic voice",
+  "sections": [
+    {
+      "section": "Updated slides",
+      "start_seconds": 0,
+      "seconds": 228.120045
+    },
+    {
+      "section": "Recorded evidence transition",
+      "start_seconds": 228.12,
+      "seconds": 19.76
+    },
+    {
+      "section": "Original application, push, CI and cloud footage",
+      "start_seconds": 247.88,
+      "seconds": 348.0
+    },
+    {
+      "section": "Original authenticated monitoring and troubleshooting",
+      "start_seconds": 595.88,
+      "seconds": 52.342313
+    },
+    {
+      "section": "Final cleanup",
+      "start_seconds": 648.222,
+      "seconds": 30.167347
+    }
+  ],
+  "new_cards": [
+    {
+      "scene": "transition",
+      "narration": "The slides reflect the final project results. The next section preserves the actual application and cloud recording, including the real push and completed pipeline. The AWS services shown were running during that capture and have since been removed. This is recorded evidence, not a claim that the cloud deployment is live now.",
+      "seconds": 19.753197
+    },
+    {
+      "scene": "closing",
+      "narration": "The final cleanup completed after this recording. Terraform destroyed fifty-nine resources, and all eleven audit checks passed. The cluster and VPC are absent, all four instances are terminated, and the application data volumes are deleted. The owned encryption key is pending its scheduled deletion on November fifteenth, twenty twenty-six. The repository contains the code, slides, exact script and all evidence. This video uses the MacBook Samantha voice. Thank you.",
+      "seconds": 30.167347
+    }
+  ],
+  "cloud_evidence": "Actual historical capture, recorded before verified teardown",
+  "recorded_ci_run": "https://github.com/dibyo10/resolvedesk-devsecops/actions/runs/38902868534"
 }

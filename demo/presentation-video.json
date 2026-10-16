@@ -1,0 +1,67 @@
+{
+  "voice": "macOS Samantha",
+  "rate": 165,
+  "seconds": 228.120045,
+  "slides": [
+    {
+      "slide": 1,
+      "title": "ResolveDesk",
+      "seconds": 23.280454,
+      "narration": "This is ResolveDesk, a helpdesk application for recording, assigning and resolving support tickets. The goal is to demonstrate a small working product and its complete DevSecOps delivery process. I will cover the architecture first, then show the application, code, pipeline and recorded cloud deployment. The temporary AWS resources have already been removed."
+    },
+    {
+      "slide": 2,
+      "title": "A small workflow, implemented end to end",
+      "seconds": 21.52,
+      "narration": "Each ticket keeps its requester, subject, description, priority and assignee together. A ticket moves from Open to In progress to Resolved, and it can be reopened. Search, filters and summary counts make triage easier. This is a classroom demonstration using synthetic data. It does not include authentication or send customer email."
+    },
+    {
+      "slide": 3,
+      "title": "Separate responsibilities",
+      "seconds": 21.92,
+      "narration": "The React frontend handles the workspace and forms. FastAPI routes define the HTTP interface, Pydantic schemas validate requests, and service functions perform ticket operations. SQLAlchemy manages storage, while Alembic versions the database schema. This separation makes the application easier to understand and test."
+    },
+    {
+      "slide": 4,
+      "title": "One application, two delivery paths",
+      "seconds": 23.84,
+      "narration": "A browser reaches React through Nginx. API requests go to FastAPI, which stores tickets in PostgreSQL. Docker Compose runs these services locally. In the cloud, Terraform creates the infrastructure and Helm describes the workloads. GitHub Actions publishes verified images, ArgoCD reconciles the release, and Prometheus supplies metrics to Grafana."
+    },
+    {
+      "slide": 5,
+      "title": "Test before publication",
+      "seconds": 20.16,
+      "narration": "The pipeline runs backend and frontend tests and builds the frontend. It builds each container image once and tags it with the source commit SHA. Trivy blocks High and Critical vulnerability findings. The same scanned images are loaded into a temporary Kubernetes cluster for a Helm smoke test, then published to the GitHub Container Registry."
+    },
+    {
+      "slide": 6,
+      "title": "Make infrastructure reproducible",
+      "seconds": 28.088617,
+      "narration": "Terraform defines a VPC across two availability zones and an EKS cluster. The first NAT-based attempt hit the account's Elastic IP quota. The temporary deployment therefore used public-subnet workers with no public inbound node rules and an operator-restricted Kubernetes API. The apps ran successfully. The recovery apply was later interrupted while AWS deleted an obsolete failed worker group; that log is not claimed as a completed successful apply."
+    },
+    {
+      "slide": 7,
+      "title": "Deploy and recover predictably",
+      "seconds": 21.8,
+      "narration": "The deployment used two frontend and two backend replicas, health probes and resource limits. PostgreSQL used a persistent gp3 volume. A migration job prepared the schema, and application readiness checked the database. The backend HPA had valid CPU measurements. These results are documented with the captured runtime output."
+    },
+    {
+      "slide": 8,
+      "title": "Git records the desired release",
+      "seconds": 21.84,
+      "narration": "ArgoCD reads the Helm configuration from Git and reconciles the cluster with that desired state. Commit-based image tags connect the deployed image to the tested source. The captured application reached Synced and Healthy. The configuration also leaves backend replica ownership to the HPA, so ArgoCD does not continually undo scaling decisions."
+    },
+    {
+      "slide": 9,
+      "title": "Observe behavior, not just containers",
+      "seconds": 20.64,
+      "narration": "The health endpoint checks the process, readiness checks the migrated database, and metrics expose request counts and timing. Prometheus discovered both backend replicas as Up. Grafana displayed actual request rate and latency. The server-error panel had no matching series; I do not present that empty panel as a measured zero."
+    },
+    {
+      "slide": 10,
+      "title": "Evidence and lessons",
+      "seconds": 25.007755,
+      "narration": "ResolveDesk passed twenty-six backend tests and four frontend tests. The cloud application, GitOps status and monitoring were verified before teardown. Terraform destroy removed fifty-nine resources and all eleven cleanup checks passed. The encryption key is pending its scheduled deletion on November fifteenth. Authentication, database high availability and recovery testing remain production work."
+    }
+  ]
+}

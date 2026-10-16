@@ -4,12 +4,13 @@ This directory contains real browser captures, recorded command output, slides a
 
 ## Presentation
 
-- [Walkthrough video](walkthrough.mp4): slides first, live application and code overview, an actual new push and complete CI run, AWS evidence, Kubernetes, Helm, ArgoCD, Prometheus, Grafana and troubleshooting.
+- [Full narrated walkthrough](walkthrough.mp4) (11m18s): updated slides first, then genuine recorded application, code, push and complete CI, AWS, Kubernetes, Helm, ArgoCD, monitoring and troubleshooting; ends with verified cleanup.
+- [Narrated presentation only](presentation.mp4) (3m48s): all ten updated slides read by the built-in macOS Samantha voice. [Narration and timing](presentation-video.json) match the exact presenter script.
 - [PowerPoint](presentation.pptx) and [PDF slides](slides.pdf): ten slides.
 - [Editable slide content](slides.json) and [presentation runbook](walkthrough.txt).
 - [Exact presenter script (PDF)](demo-script.pdf) and [editable script](demo-script.md): slide-by-slide narration, precise screen actions, terminal commands, and the distinction between live local work and recorded cloud proof.
 
-The presentation PDF and presenter script were updated after teardown. The original walkthrough preserves the earlier genuine recording; its slides therefore precede the final cleanup update. Use the new deck with the script for your own narration and retain the recorded cloud footage as identified evidence.
+The walkthrough now opens with the final presentation PDF and its exact script, narrated using macOS Samantha. A spoken transition identifies the following application and cloud footage as an actual earlier recording. The real CI waiting period and cloud evidence are preserved, and a new closing segment reports completed cleanup. No cloud services were recreated for this edit.
 
 The recording preserves the live CI waiting period. Its final monitoring segment was recorded with a fresh login after Grafana restarted during setup; the obsolete login-screen segment was replaced with that genuine live capture. AWS Console images are identified as captured evidence in the narration.
 
@@ -42,6 +43,6 @@ Terraform destroy completed with 59 resources destroyed. The [destroy output](ev
 
 ## Reproduce the artifacts
 
-Install optional tools with `pip install -r scripts/requirements.txt` and `python -m playwright install chromium`. Run `python3 scripts/build-presentation.py` to rebuild the deck. `scripts/render-evidence.py` renders actual saved output. `scripts/record-walkthrough.py` requires macOS `say`, FFmpeg and ffprobe; its CI scene requires a real unpushed commit and follows the new run until completion. Browser authentication state remains outside the repository.
+Install optional tools with `pip install -r scripts/requirements.txt` and `python -m playwright install chromium`. Run `python3 scripts/build-presentation.py` to rebuild the deck. `python3 scripts/build-presentation-video.py` renders the standalone narrated deck using macOS `say`, FFmpeg, ffprobe and Poppler's `pdftoppm`; it requires no browser or AWS login. `scripts/render-evidence.py` renders actual saved output. `scripts/record-walkthrough.py` requires macOS `say`, FFmpeg and ffprobe; its CI scene requires a real unpushed commit and follows the new run until completion. Browser authentication state remains outside the repository.
 
 Run `python3 scripts/smoke-api.py --base-url http://localhost:8000` against the local application for the HTTP smoke checks. The demonstration has no authentication or HA database and is intended for synthetic classroom data only.
